@@ -30,7 +30,7 @@ RAW = ROOT / "data" / "raw"
 TEXT = ROOT / "data" / "text"
 MANIFEST = ROOT / "data" / "manifest.csv"
 INDEX_URL = "https://valtioneuvosto.fi/historia-ja-rakennukset/hallitusohjelmat"
-HEADERS = {"User-Agent": "innovation-state-research/0.1 (academic research)"}
+HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) innovation-state-research/0.2"}
 PAUSE_S = 1.5  # be polite to public servers
 
 _index_links: dict[int, str] | None = None
@@ -52,13 +52,31 @@ def index_links() -> dict[int, str]:
     return _index_links
 
 
+# Page chrome on valtioneuvosto.fi that is not part of the document
+_DROP_LINES = {"suomi", "svenska", "english", "läs artikeln på svenska",
+               "read article in english", "hallitusohjelmat vuodesta 1917",
+               "piilotettu", "sivun alkuun"}
+# Everything from these lines on is contacts, tags or related news
+_CUT_AT = ("Lisätietoja:", "Tutustu myös")
+
+
 def html_to_text(html: str) -> str:
     soup = BeautifulSoup(html, "html.parser")
     for tag in soup(["script", "style", "nav", "header", "footer", "aside"]):
         tag.decompose()
-    main = soup.find("main") or soup.find("article") or soup.body or soup
-    text = main.get_text("\n", strip=True)
-    return re.sub(r"\n{3,}", "\n\n", text)
+    # valtioneuvosto.fi: the document is the largest journal-content-article block
+    blocks = soup.select("div.journal-content-article")
+    if blocks:
+        main = max(blocks, key=lambda d: len(d.get_text(" ", strip=True).split()))
+    else:
+        main = soup.find("main") or soup.find("article") or soup.body or soup
+    lines = []
+    for line in main.get_text("\n", strip=True).splitlines():
+        if line.strip().startswith(_CUT_AT):
+            break
+        if line.strip().lower() not in _DROP_LINES:
+            lines.append(line)
+    return "\n".join(lines)
 
 
 def pdf_to_text(path: Path) -> str:
@@ -78,17 +96,25 @@ def fetch(row: dict) -> tuple[str, str]:
     if ocr.exists():
         (TEXT / f"{doc_id}.txt").write_text(pdf_to_text(ocr), encoding="utf-8")
         return "ok", "pdf_ocr"
+    manual = RAW / f"{doc_id}.pdf"
+    if manual.exists() and not url:
+        text = pdf_to_text(manual)
+        if len(text.replace("[[page", "").strip()) < 500:
+            return "needs_ocr", str(manual)
+        (TEXT / f"{doc_id}.txt").write_text(text, encoding="utf-8")
+        return "ok", "pdf_text (manual download)"
 
-    if row["series"] == "government_programme":
-        num = int(doc_id.removeprefix("GP"))
-        if not url or not _reachable(url):
-            url = index_links().get(num, "")
-    if not url:
+    resp = _get(url) if url else None
+    if (resp is None or resp.status_code != 200) and row["series"] == "government_programme":
+        # Fallback: look the programme up on the index page by its number
+        alt = index_links().get(int(doc_id.removeprefix("GP")), "")
+        if alt and alt != url:
+            url, resp = alt, _get(alt)
+    if resp is None:
         return "missing_url", row.get("notes", "")
-
-    resp = requests.get(url, headers=HEADERS, timeout=60)
     if resp.status_code != 200:
-        return "http_error", f"{resp.status_code} {url}"
+        return "http_error", f"{resp.status_code} {url} (download manually into data/raw/{doc_id}.pdf)"
+    url = resp.url  # after redirects (urn.fi resolves to the real file)
 
     ctype = resp.headers.get("Content-Type", "")
     if "pdf" in ctype or url.lower().endswith(".pdf"):
@@ -107,11 +133,17 @@ def fetch(row: dict) -> tuple[str, str]:
     return "ok", f"{quality} {len(text.split())} words {url}"
 
 
-def _reachable(url: str) -> bool:
-    try:
-        return requests.head(url, headers=HEADERS, timeout=20, allow_redirects=True).status_code == 200
-    except requests.RequestException:
-        return False
+def _get(url: str, tries: int = 3) -> requests.Response | None:
+    """GET with retries. (No HEAD requests: valtioneuvosto.fi rejects them.)"""
+    for attempt in range(tries):
+        try:
+            resp = requests.get(url, headers=HEADERS, timeout=60, allow_redirects=True)
+        except requests.RequestException:
+            resp = None
+        if resp is not None and resp.status_code not in (429, 500, 502, 503):
+            return resp
+        time.sleep(5 * (attempt + 1))
+    return resp
 
 
 def main(csv_path: str) -> None:
