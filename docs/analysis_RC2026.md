@@ -122,3 +122,5 @@ None of these is a claim about the Council's intentions or about any named perso
 1. Validate the stems in §4: read every matched passage, add `near`/`not_near` rules and tests, then add them to `vocab/concepts.csv` as v0.2.
 2. Rerun v0.2 on GP77 (Orpo programme), RC2024, RC2017 and RC2014 once those are in, and test Hypotheses A–C.
 3. Use this document for the first AI claim-extraction test, since its claims are explicit and well structured.
+
+A close reading of chapters 5–6 (system priorities, implementation and monitoring) is in [analysis_RC2026_ch5-6.md](analysis_RC2026_ch5-6.md).

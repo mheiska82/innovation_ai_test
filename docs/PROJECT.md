@@ -213,6 +213,7 @@ prompts/claim_extraction.md  LLM extraction prompt (stage 2)
 db/schema.sql                claims-and-evidence database (stage 2)
 docs/PROJECT.md              this document
 docs/analysis_RC2026.md      separate analysis of the 2026 strategic choices report
+docs/analysis_RC2026_ch5-6.md  close reading of its chapters 5–6
 ```
 
 **To reproduce:**
