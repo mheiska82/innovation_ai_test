@@ -79,6 +79,33 @@ def html_to_text(html: str) -> str:
     return "\n".join(lines)
 
 
+VALTO = "https://julkaisut.valtioneuvosto.fi"
+
+
+def valto_pdf_url(page_url: str, html: str) -> str | None:
+    """Valto (julkaisut.valtioneuvosto.fi, DSpace 7) item page -> URL of its PDF.
+
+    urn.fi links resolve to the item's landing page, not the file. Ask the
+    DSpace REST API for the item's ORIGINAL bundle; fall back to scanning the
+    page for a bitstream download link.
+    """
+    m = re.search(r"/items/([0-9a-f-]{36})", page_url)
+    if m:
+        try:
+            api = f"{VALTO}/server/api/core/items/{m.group(1)}/bundles?embed=bitstreams"
+            data = requests.get(api, headers=HEADERS, timeout=30).json()
+            for bundle in data.get("_embedded", {}).get("bundles", []):
+                if bundle.get("name") != "ORIGINAL":
+                    continue
+                for bs in bundle.get("_embedded", {}).get("bitstreams", {}).get("_embedded", {}).get("bitstreams", []):
+                    if bs.get("name", "").lower().endswith(".pdf"):
+                        return bs["_links"]["content"]["href"]
+        except (requests.RequestException, ValueError, KeyError):
+            pass
+    m = re.search(r'href="([^"]*/bitstreams/[0-9a-f-]{36}/download)"', html)
+    return urljoin(page_url, m.group(1)) if m else None
+
+
 def pdf_to_text(path: Path) -> str:
     from pypdf import PdfReader
 
@@ -114,7 +141,14 @@ def fetch(row: dict) -> tuple[str, str]:
         return "missing_url", row.get("notes", "")
     if resp.status_code != 200:
         return "http_error", f"{resp.status_code} {url} (download manually into data/raw/{doc_id}.pdf)"
-    url = resp.url  # after redirects (urn.fi resolves to the real file)
+    url = resp.url  # after redirects
+    if "julkaisut.valtioneuvosto.fi" in url and "pdf" not in resp.headers.get("Content-Type", ""):
+        pdf = valto_pdf_url(url, resp.text)
+        if not pdf:
+            return "needs_manual", f"Valto page without PDF link: {url}"
+        url, resp = pdf, _get(pdf)
+        if resp is None or resp.status_code != 200:
+            return "http_error", f"{getattr(resp, 'status_code', '?')} {url}"
 
     ctype = resp.headers.get("Content-Type", "")
     if "pdf" in ctype or url.lower().endswith(".pdf"):
@@ -154,6 +188,9 @@ def main(csv_path: str) -> None:
 
     results = []
     for row in rows:
+        if row["url_status"].startswith("same_as:"):
+            results.append({"id": row["id"], "status": "skipped", "detail": row["url_status"]})
+            continue
         if row["series"] == "benchmark" or row["url_status"] == "library":
             results.append({"id": row["id"], "status": "skipped", "detail": row["url_status"]})
             continue
