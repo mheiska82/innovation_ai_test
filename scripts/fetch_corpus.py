@@ -191,7 +191,7 @@ def main(csv_path: str) -> None:
         if row["url_status"].startswith("same_as:"):
             results.append({"id": row["id"], "status": "skipped", "detail": row["url_status"]})
             continue
-        if row["series"] == "benchmark" or row["url_status"] == "library":
+        if row["series"] == "benchmark" or row["url_status"] in ("library", "gap_no_access"):
             results.append({"id": row["id"], "status": "skipped", "detail": row["url_status"]})
             continue
         try:

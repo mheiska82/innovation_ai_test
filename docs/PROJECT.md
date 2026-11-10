@@ -32,13 +32,13 @@ This document reports on question 1, the first stage.
 
 ### Corpus, batch 1
 
-The corpus list is in `corpus/batch1.csv` (52 entries). So far 34 documents have been downloaded.
+The corpus list is in `corpus/batch1.csv` (53 entries). So far 34 documents have been downloaded.
 
 | Series | Documents | Status |
 |---|---|---|
 | Government programmes (*hallitusohjelmat*), governments 46–77, 1961–2023 | 32 entries, 30 counted | All downloaded |
-| Research and Innovation Council reviews and decisions, 1973–2024 | 14 | 2 downloaded (press releases only); 12 still to locate |
-| Anchor documents (2008 innovation policy report, 2014 evaluation of the Council, 2022 R&D funding act) | 3 | 1 downloaded |
+| Research and Innovation Council reviews and decisions, 1973–2024 | 14 | 2003 onwards: 8 rows, 2 with main documents online (2024 plan; 2003 and 2008 via retired minedu.fi links), 2017 and 2020 press releases only, 2006/2010/2014 still to locate. **1973–2000: 6 rows, not obtainable (see Corpus gaps)** |
+| Anchor documents (2008 innovation policy report, 2014 evaluation of the Council, 2022 R&D funding act, 2023 first multi-annual R&D plan) | 4 | All 4 have online links |
 | Human benchmark studies (Eela 2001; Lemola 2001; Lemola 2020) | 3 | Reference only, not counted |
 
 **Sources.** The programmes up to 1999 come as web text from valtioneuvosto.fi ("Hallitusohjelmat vuodesta 1917"). Programmes from 2003 onwards come as PDFs from the government publication archive Valto (julkaisut.valtioneuvosto.fi).
@@ -60,6 +60,19 @@ The corpus list is in `corpus/batch1.csv` (52 entries). So far 34 documents have
 ### Size
 
 The 30 counted programmes total about **200,000 words**. Programme length grew roughly 300-fold, from 52 words (Liinamaa 1975) and 168 words (Miettunen 1961) to 55,383 words (Orpo 2023). Because of this growth, all results are given as mentions per 10,000 words.
+
+### Corpus gaps (acknowledged)
+
+The corpus is incomplete, and the gaps are not random. They should be read as part of the method, not as a footnote.
+
+| Gap | Documents | Why | Consequence |
+|---|---|---|---|
+| **Council reviews 1973–2000** | Tiedeneuvosto reviews 1973–1986; Tiede- ja teknologianeuvosto reviews 1987, 1990, 1993, 1996, 2000 (rows RC1973–RC2000) | Available only in print or as library scans. I currently have no library access, so they cannot be checked or digitised. | No expert-advisory voice for the first four decades. Questions like "was *kansallinen innovaatiojärjestelmä* Council vocabulary before it reached the government programmes?" **cannot be answered yet**. Eela (2001) and Lemola (2001) cover this period and are used as secondary references only. |
+| **Council reviews 2006, 2010, 2014** | *Tiede, teknologia, innovaatiot* (2006); *Linjaus 2011–2015* (2010); *Uudistuva Suomi* (2014) | Titles and dates are confirmed from secondary sources, but no stable online copy has been found yet. | The 2005–2015 period, when innovation policy was being reframed, is under-represented on the Council side. |
+| **Retired web addresses** | 2003 and 2008 reviews | Cited at old minedu.fi addresses that no longer resolve. A web-archive copy, or a manual download, is needed. | The text may differ slightly from the printed edition. |
+| **Press releases instead of main texts** | 2017 vision and roadmap; 2020 RDI roadmap | Only the announcements were found. | A press release is a summary written for the media and is not comparable in genre or length with a full review. These rows are excluded from counting until the main documents are found. |
+
+Until these gaps are closed, all claims in this project are about **government programmes**. Nothing here is a claim about the Council reviews as a series, and no comparison between the two series is made. Rows with `url_status = gap_no_access` are skipped by the fetch script, so the gap stays visible in the manifest instead of disappearing.
 
 ## 4. Method
 
@@ -170,6 +183,8 @@ The dashboard shows the 13 concepts with enough mentions to draw a readable line
 
 ## 6. Limitations
 
+- **The corpus has known gaps.** The Council reviews from 1973–2000 cannot be obtained at the moment because there is no library access, and three later reviews (2006, 2010, 2014) are not yet online in the corpus. The results therefore describe government programmes only. See *Corpus gaps* in §3.
+
 - **Lexical counting misses ideas expressed in other words.** It also misses compounds where the concept sits inside the word; for example, *kasvuyritysekosysteemi* is not counted as "ecosystem". The planned LLM claim extraction addresses this.
 - **Early programmes are very short** (often under 1,000 words), so the 1960s–80s rates rest on few mentions.
 - **Decades blur governments.** For example, the 2019 Rinne programme sits in the 2010s, and the 2020s hold a single programme (Orpo).
@@ -178,7 +193,7 @@ The dashboard shows the 13 concepts with enough mentions to draw a readable line
 
 ## 7. Next steps
 
-1. **Collect the Council reviews:** the National Library catalogue for 1973–2000 and Valto for 2003 onwards. Then test whether "national innovation system" was Council vocabulary.
+1. **Collect the Council reviews from 2003 onwards** (2024 plan and 2023 parliamentary plan are online; 2003/2008 need archived copies; 2006/2010/2014 still to locate). The 1973–2000 reviews wait until library access is available; until then, the question "was national innovation system Council vocabulary first?" stays open.
 2. **Compare with the human benchmarks.** Does the tracker reproduce the periods found by Eela (2001) and Lemola (2020)?
 3. **Claim extraction (weeks 5–9):** evidence-level claims with verbatim excerpts, plus a counter-evidence search.
 4. **MCP server and the start-up track (weeks 10–13).**
