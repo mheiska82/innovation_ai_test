@@ -193,6 +193,8 @@ The dashboard shows the 13 concepts with enough mentions to draw a readable line
 
 ## 7. Next steps
 
+*A separate first analysis of the newest Council document (RC2026, 2026 strategic choices) is in [analysis_RC2026.md](analysis_RC2026.md).*
+
 1. **Collect the Council reviews from 2003 onwards** (2024 plan and 2023 parliamentary plan are online; 2003/2008 need archived copies; 2006/2010/2014 still to locate). The 1973–2000 reviews wait until library access is available; until then, the question "was national innovation system Council vocabulary first?" stays open.
 2. **Compare with the human benchmarks.** Does the tracker reproduce the periods found by Eela (2001) and Lemola (2020)?
 3. **Claim extraction (weeks 5–9):** evidence-level claims with verbatim excerpts, plus a counter-evidence search.
@@ -210,6 +212,7 @@ scripts/vocabulary.py        concept counting, duplicate check
 prompts/claim_extraction.md  LLM extraction prompt (stage 2)
 db/schema.sql                claims-and-evidence database (stage 2)
 docs/PROJECT.md              this document
+docs/analysis_RC2026.md      separate analysis of the 2026 strategic choices report
 ```
 
 **To reproduce:**

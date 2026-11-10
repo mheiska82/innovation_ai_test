@@ -1,0 +1,24 @@
+decade,concept_id,label_en,group,count,words,documents,per_10k_words
+2020,industrial_policy,Industrial policy,old_paradigm,1,24453,2,0.41
+2020,technology_policy,Technology policy,old_paradigm,1,24453,2,0.41
+2020,science_policy,Science policy,old_paradigm,4,24453,2,1.64
+2020,research_development,R&D,core,426,24453,2,174.21
+2020,innovation,Innovation (any),core,148,24453,2,60.52
+2020,national_innovation_system,National innovation system,nis_era,4,24453,2,1.64
+2020,knowledge_competence,Knowledge and competence,nis_era,139,24453,2,56.84
+2020,information_society,Information society,nis_era,0,24453,2,0.0
+2020,cluster,Clusters and centres of expertise,nis_era,13,24453,2,5.32
+2020,competitiveness,Competitiveness,cross_cutting,46,24453,2,18.81
+2020,internationalisation,Internationalisation,cross_cutting,3,24453,2,1.23
+2020,entrepreneurship,Entrepreneurship,new_paradigm,0,24453,2,0.0
+2020,growth_companies,Growth companies,new_paradigm,4,24453,2,1.64
+2020,startup,Start-ups,new_paradigm,8,24453,2,3.27
+2020,commercialisation,Commercialisation,new_paradigm,11,24453,2,4.5
+2020,venture_capital,Venture capital,new_paradigm,2,24453,2,0.82
+2020,ecosystem,Ecosystem,new_paradigm,21,24453,2,8.59
+2020,rdi,RDI (TKI),new_paradigm,326,24453,2,133.32
+2020,digitalisation,Digitalisation,new_paradigm,34,24453,2,13.9
+2020,artificial_intelligence,Artificial intelligence,new_paradigm,39,24453,2,15.95
+2020,deep_tech,Deep tech,new_paradigm,1,24453,2,0.41
+2020,sustainability,Sustainability and green transition,new_paradigm,20,24453,2,8.18
+2020,rd_target,R&D spending target,cross_cutting,3,24453,2,1.23
