@@ -32,7 +32,7 @@ This document reports on question 1, the first stage.
 
 ### Corpus, batch 1
 
-The corpus list is in `project1/corpus/programmes.csv` (34 entries: 32 government programmes and 2 human benchmarks). All 30 counted programmes are downloaded.
+The corpus list is in `project1/corpus/programmes.csv` (39 entries: 32 government programmes, 2 human benchmarks and 5 context documents for research question 2). All 30 counted programmes are downloaded.
 
 > **The Research and Innovation Council reviews are now a separate track, [Project 2](../project2/PROJECT2.md),** with their own corpus list (`project2/corpus/council.csv`), corpus gaps, analyses and [Dashboard 2](https://claude.ai/artifact/QuE38nxXvvPoXBvLtKEMpB). This document covers Project 1: the government programmes.
 
@@ -40,6 +40,7 @@ The corpus list is in `project1/corpus/programmes.csv` (34 entries: 32 governmen
 |---|---|---|
 | Government programmes (*hallitusohjelmat*), governments 46–77, 1961–2023 | 32 entries, 30 counted | All downloaded |
 | Human benchmark studies (Lemola 2001; Lemola 2020) | 2 | Reference only, not counted. Eela (2001), a benchmark for the Council reviews, moved to Project 2 |
+| Context documents for question 2 (2008 national innovation strategy, 2009 evaluation of the innovation system, OECD 2017 and 2022) | 5 | 4 online; the 2008 strategy has a retired tem.fi address. Not counted with the programmes |
 
 **Sources.** The programmes up to 1999 come as web text from valtioneuvosto.fi ("Hallitusohjelmat vuodesta 1917"). Programmes from 2003 onwards come as PDFs from the government publication archive Valto (julkaisut.valtioneuvosto.fi).
 
@@ -56,6 +57,20 @@ The corpus list is in `project1/corpus/programmes.csv` (34 entries: 32 governmen
 |---|---|
 | Aura II (1971) | Caretaker government; the text is the Prime Minister's speech |
 | Kiviniemi (2010) and Stubb (2014) | Short programmes that continue their predecessors' programmes with additions |
+
+### Context documents for research question 2
+
+Question 2 (when does the theory of how Finland creates prosperity change?) needs documents where that theory is stated explicitly, not only programmes. They are listed in the same corpus file but kept out of the programme counts (`series` = `strategy` or `evaluation`).
+
+| ID | Document | Why it matters | Link status |
+|---|---|---|---|
+| ST2008 | Kansallinen innovaatiostrategia (proposal, 12.6.2008) | The clearest written statement of the theory at the 2000s turning point; basis of the Government report VNS 5/2008 (Project 2, AN2008) | Retired tem.fi address: web archive or manual save |
+| EV2009F | Evaluation of the Finnish National Innovation System, Full Report (2009) | An outside, international view of the system at the turning point, starting from the 2008 strategy | Online (ETLA) |
+| EV2009P | The same evaluation, Policy Report (2009) | Summary of the key findings | Online (ETLA) |
+| OE2017 | OECD Reviews of Innovation Policy: Finland 2017 | An outside view after the restructuring of the 2010s; cited in the 2026 Council report | Online (OECD, DOI) |
+| OE2022 | OECD Economic Surveys: Finland 2022, chapter "Rebooting the innovation ecosystems" | The ecosystem framing from outside; cited in the 2026 Council report | Online (OECD, DOI) |
+
+**Language.** EV2009 and the OECD documents are in English. The tracker's stems are Finnish, so these documents are used for claim extraction (and later English stems), not for the Finnish vocabulary counts.
 
 ### Size
 

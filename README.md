@@ -22,7 +22,7 @@ The two series are different genres: coalition agreements versus expert policy g
 README.md                      this overview
 project1/                      Project 1: government programmes
   PROJECT1.md                  description, method, results
-  corpus/programmes.csv        corpus list (32 programmes, 2 human benchmarks)
+  corpus/programmes.csv        corpus list (32 programmes, 2 human benchmarks, 5 context documents)
   data/                        tracker outputs
 project2/                      Project 2: Council reviews
   PROJECT2.md                  description, corpus gaps, method, results
