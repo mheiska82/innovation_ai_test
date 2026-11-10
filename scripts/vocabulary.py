@@ -42,7 +42,36 @@ def load_concepts() -> list[dict]:
         stems = [p.strip().lower() for p in c["patterns"].split("|") if p.strip()]
         # word-start match; stems may contain spaces, hyphens, & and commas
         c["regex"] = re.compile(r"(?<![\wåäö])(?:" + "|".join(re.escape(s) for s in stems) + ")", re.IGNORECASE)
+        # optional context rules: a hit counts only if a `near` stem is within
+        # WINDOW characters, and no `not_near` stem is
+        for key in ("near", "not_near"):
+            ctx = [p.strip().lower() for p in (c.get(key) or "").split("|") if p.strip()]
+            c[key + "_re"] = re.compile("|".join(re.escape(x) for x in ctx), re.IGNORECASE) if ctx else None
     return concepts
+
+
+WINDOW = 150
+
+
+def keep_hit(c: dict, text: str, m: re.Match) -> bool:
+    ctx = text[max(0, m.start() - WINDOW): m.end() + WINDOW]
+    if c["near_re"] and not c["near_re"].search(ctx):
+        return False
+    if c["not_near_re"] and c["not_near_re"].search(ctx):
+        return False
+    return True
+
+
+def clean(text: str, is_pdf: bool) -> str:
+    """Remove page markers and table-of-contents lines; undo PDF line-break hyphenation."""
+    text = re.sub(r"\[\[page \d+\]\]", " ", text)
+    # table-of-contents lines ("6.1 Koulutus- ja tiedepolitiikka ........ 21")
+    text = "\n".join(l for l in text.splitlines() if not re.search(r"\.{5,}|…{3,}", l))
+    if is_pdf:
+        # "kilpailuky- kyä" -> "kilpailukykyä", "in - novaatio" -> "innovaatio";
+        # keep real compounds such as "tutkimus- ja kehitys"
+        text = re.sub(r"([a-zåäö])\s?-\s+(?!(?:ja|sekä|tai|eli|että|kuin)\b)([a-zåäö])", r"\1\2", text)
+    return text
 
 
 def load_exclusions() -> re.Pattern | None:
@@ -124,7 +153,8 @@ def main() -> None:
         year = year_of(row)
         if year is None:
             continue
-        text = re.sub(r"\[\[page \d+\]\]", " ", path.read_text(encoding="utf-8"))
+        raw = path.read_text(encoding="utf-8")
+        text = clean(raw, is_pdf="[[page " in raw)
         texts[doc_id] = text
         n_words = len(WORD.findall(text))  # counted before exclusions
         if exclude:
@@ -136,7 +166,7 @@ def main() -> None:
         decade_docs[decade].append(doc_id)
 
         for c in concepts:
-            hits = list(c["regex"].finditer(text))
+            hits = [m for m in c["regex"].finditer(text) if keep_hit(c, text, m)]
             by_doc.append({
                 "document_id": doc_id, "series": row["series"], "year": year, "decade": decade,
                 "words": n_words, "concept_id": c["concept_id"], "group": c["group"],
