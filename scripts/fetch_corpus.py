@@ -124,7 +124,7 @@ def fetch(row: dict) -> tuple[str, str]:
         (TEXT / f"{doc_id}.txt").write_text(pdf_to_text(ocr), encoding="utf-8")
         return "ok", "pdf_ocr"
     manual = RAW / f"{doc_id}.pdf"
-    if manual.exists() and not url:
+    if manual.exists():  # a saved PDF (manual or earlier download) wins over the URL
         text = pdf_to_text(manual)
         if len(text.replace("[[page", "").strip()) < 500:
             return "needs_ocr", str(manual)
