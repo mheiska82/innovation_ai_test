@@ -1,68 +1,46 @@
-import re,csv
-def norm(t):
-    t=re.sub(r'\[\[page \d+\]\]',' ',t)
-    t=re.sub(r'\s+',' ',t)
-    t=re.sub(r'([a-zåäö]) ?- (?!(?:ja|sekä|tai|eli|että|kuin|and|or)\b)([a-zåäö])',r'\1\2',t)
-    return t
-src={d:norm(open(d+'.txt',encoding='utf-8').read()) for d in ['GP64','GP68','GP74','EV2009P']}
-meta={'GP64':('1987','Holkeri government'),'GP68':('2003','Jäätteenmäki / Vanhanen I government'),'GP74':('2015','Sipilä government'),'EV2009P':('2009','International evaluation panel')}
-# (doc, page, type, cause, mechanism, outcome, tags, excerpt)
-C=[
-('GP64','','causal','Ability to respond to structural change','adaptation to the international division of labour','Strengthened economic base','structural_adaptation','Kansallisen kulttuurin ja identiteetin sekä taloutemme perustan vahvistaminen edellyttävät kykyä vastata rakennemuutoksen haasteisiin ja tarttua sen tuomiin mahdollisuuksiin.'),
-('GP64','','causal','Finnish knowledge and competence','(implicit) basis for meeting structural change','National economic base and identity','knowledge_competence','Suomalaisen tiedon ja osaamisen merkitys on ratkaisevaa.'),
-('GP64','','causal','Firms able to succeed in international competition','competitiveness of firms','Substantially lower unemployment','competitiveness_exports','Työttömyyden tuntuva alentaminen edellyttää, että yritysten mahdollisuudet menestyä kansainvälisessä kilpailussa ovat riittävän hyvät.'),
-('GP64','','causal','Long-term, consistent, growth-supporting economic policy','macroeconomic stability','Lower unemployment, low inflation, stable markka','macro_stability','Tavoitteet ovat saavutettavissa pitkäjänteisellä, johdonmukaisella ja kasvua tukevalla talouspolitiikalla.'),
-('GP64','','instrument','Firms\' R&D, training and marketing','strengthening firm capabilities','Industrial competitiveness','rd_technology','Teollisuuden kilpailuedellytyksiä parannetaan vahvistamalla yritysten tutkimus- ja kehitystoimintaa, koulutusta ja markkinointia.'),
-('GP64','','causal','More funding for R&D and education','new activities and skills','Structural change supported; new jobs','rd_technology; knowledge_competence','Rakennemuutosten tukemiseksi ja uusien työpaikkojen synnyttämiseksi lisätään tutkimus- ja tuotekehitystoimintaan sekä koulutukseen tarkoitettuja määrärahoja.'),
-('GP64','','causal','More competition','market pressure','Lower inflation; more diverse supply','competition_markets','Inflaation torjumiseksi ja tarjonnan monipuolistamiseksi tehostetaan kilpailua.'),
-('GP64','','instrument','Regional support redirected to education, competence and know-how','building regional capabilities','(implicit) regional development','knowledge_competence','Aluepoliittisen tuen painopistettä siirretään koulutukseen, osaamiseen ja tietotaitoon.'),
-('GP68','10','causal','Competence, entrepreneurship and other growth conditions','strengthening the conditions for growth','Economic growth (basis of economic policy)','knowledge_competence; entrepreneurship_firms','Hallituksen talouspolitiikka perustuu osaamisen, yrittäjyyden ja muiden kasvun edellytysten vahvistamiseen.'),
-('GP68','10','causal','R&D and a higher education level of the population','priorities for competitiveness','Finland\'s competitiveness','rd_technology; knowledge_competence','Suomen kilpailukyvystä huolehditaan pitäen painopisteinä tutkimuksen ja tuotekehityksen edistämistä, väestön koulutustason kohottamista'),
-('GP68','10','diagnosis','Faster adoption of new IT applications','technology diffusion','(implicit) productivity and growth','digital_ict','Uuden tietotekniikan sovellutusten entistä nopeampi käyttöönotto on kansallinen haaste.'),
-('GP68','35','causal','Competence and the use of new technology','knowledge-based production','Economic growth and competitiveness','knowledge_competence; rd_technology','Suomen talouden kasvu ja kilpailukyky perustuvat jatkossakin ennen kaikkea osaamiseen ja uuden teknologian hyödyntämiseen.'),
-('GP68','35','causal','Continued growth of R&D','(follows from the previous claim)','Growth and competitiveness','rd_technology','Siksi tutkimus- ja kehittämistoiminnan kasvun jatkuminen on välttämätöntä.'),
-('GP68','35','instrument','Entrepreneurship policy programme','an environment for firm creation and growth','Firm growth, internationalisation, start-ups and successions','entrepreneurship_firms','Ohjelman tavoitteena on luoda toimintaympäristö, joka edistää yritysten kasvua ja kansainvälistymistä sekä yritysten perustamista ja sukupolvenvaihdoksia.'),
-('GP68','35','rationale','Market gap in private finance','public finance only where private markets fail','Viable projects get funded','market_failure','Julkisen yritysrahoituksen tavoitteena on sellaisten rahoituskelpoisten hankkeiden rahoittaminen, joihin yksityisiltä rahoitusmarkkinoilta ei ole saatavissa riittävää rahoitusta.'),
-('GP68','21','causal','Staff competence, coping at work, good labour relations','workforce capability','National success','knowledge_competence; labour_consensus','Henkilöstön korkea osaaminen, työssä jaksaminen ja toimivat työmarkkinasuhteet ovat tärkeitä kansallisia menestystekijöitä.'),
-('GP68','9','causal','Cooperation of government and labour-market and entrepreneur organisations','securing price competitiveness; reforming working life and social security','Good employment development','labour_consensus; competitiveness_exports','Hyvä työllisyyskehitys edellyttää tuloksellista yhteistyötä hallituksen sekä työmarkkina- ja yrittäjäjärjestöjen kesken hintakilpailukyvyn turvaamisessa sekä työelämän ja sosiaaliturvan uudistamisessa.'),
-('GP68','9','causal','Competitive infrastructure and taxation','attractive location for firms and their key functions','(implicit) investment and activity in Finland','location_attractiveness','Suomen täytyy olla sekä infrastruktuuriltaan että verotuksellisesti kilpailukykyinen sijaintipaikka yrityksille ja niiden avaintoiminnoille.'),
-('GP68','31','causal','Employment, economic growth, entrepreneurship','tax base','Sustainable funding of basic public services','growth_to_welfare','Työllisyyden paraneminen, taloudellinen kasvu ja yrittäjyyden edistäminen ovat edellytys kestävälle peruspalvelujen rahoitukselle.'),
-('GP68','42','causal','Information society; technology- and competence-based opportunities','renewal of welfare-state structures','Savings and secured services','digital_ict; growth_to_welfare','Tietoyhteiskunnan kehittäminen ja sen tarjoamat teknologiaan ja osaamiseen perustuvat mahdollisuudet on nähtävä hyvinvointiyhteiskunnan rakenteiden uudistamisen välineinä'),
-('GP68','33','causal','Ecologically sustainable consumption and production','sustainability as a competitive factor','Competitiveness of a knowledge society','sustainability','tieto- ja osaamisyhteiskuntana, jonka kilpailukyky perustuu ekologisesti kestävän kehityksen ehdot täyttävään kulutukseen ja tuotantoon'),
-('GP74','7','causal','Good management, strong entrepreneurship and ownership, use of all regions\' resources','firm-driven growth','A growing economy','entrepreneurship_firms','Kasvava talous perustuu hyvään johtamiseen, vahvaan yrittäjyyteen ja omistajuuteen sekä koko Suomen voimavarojen hyödyntämiseen.'),
-('GP74','7','causal','High competence, sustainable development, bold renewal through experiments and digitalisation','renewal','Finland\'s competitiveness','knowledge_competence; sustainability; digital_ict; experimentation','Suomen kilpailukyky rakentuu korkealle osaamiselle, kestävälle kehitykselle sekä ennakkoluulottomalle uudistamiselle kokeiluja ja digitalisaatiota hyödyntäen.'),
-('GP74','8','diagnosis','Competence that does not turn into innovation; innovations not commercialised','broken knowledge → innovation → market chain','(implicit) weak growth','knowledge_competence; commercialisation','Osaaminen ei muutu innovaatioiksi, innovaatiot eivät kaupallistu.'),
-('GP74','8','diagnosis','(see previous claim)','erosion of a knowledge-based advantage','Loss of competitive advantage','knowledge_competence','Olemme menettämässä osaamiseen perustuvaa kilpailuetuamme.'),
-('GP74','8','diagnosis','Rigidities','constraining entrepreneurship and creativity','Less initiative and participation','deregulation_reform; entrepreneurship_firms','Jäykkyydet kahlitsevat yrittäjyyttä ja luovuutta sekä latistavat ihmisten oma-aloitteisuutta ja osallistumista.'),
-('GP74','8','causal','Excessive regulation and administration','loss of agility','Lost competitiveness','deregulation_reform','Suomi on menettänyt liiallisella sääntelyllä ja hallinnoinnilla ketteryytensä ja samalla kilpailukykynsä.'),
-('GP74','8','causal','Success of Finnish exports','small open economy','Finland\'s economic success','competitiveness_exports','Suomi on pieni avoin talous, jonka pärjääminen perustuu suomalaisten tuotteiden ja palveluiden viennin menestykseen.'),
-('GP74','8','causal','Releasing people\'s own resources','creativity, enterprise','Building welfare','entrepreneurship_firms; deregulation_reform','Meidän on vapautettava ihmisten omat voimavarat luovuuteen, yritteliäisyyteen ja hyvinvoinnin rakentamiseen.'),
-('GP74','10','causal','Measures to improve competitiveness','cost competitiveness','Stronger exports and conditions for domestic firms','competitiveness_exports','Toimet kilpailukyvyn parantamiseksi vahvistavat vientiä ja kotimarkkinoilla toimivien yritysten toimintaedellytyksiä.'),
-('GP74','11','instrument','Tax policy','incentives','Growth, entrepreneurship and employment','entrepreneurship_firms','Hallituksen veropolitiikka tähtää kasvun, yrittäjyyden ja työllisyyden vahvistamiseen.'),
-('GP74','14','causal','Structural reforms','labour supply, entrepreneurship, diversification','Stronger public finances','deregulation_reform; entrepreneurship_firms','Uudistukset lisäävät työn tarjontaa, yrittäjyyttä ja elinkeinorakenteen monipuolistumista sekä vahvistavat julkistaloutta yli miljardilla eurolla.'),
-('GP74','18','instrument','Research impact and commercialisation','turning research into business','(implicit) innovation and growth','commercialisation','Vahvistetaan tutkimustulosten vaikuttavuutta ja kaupallistamista.'),
-('GP74','18','instrument','Concentrating competence','critical mass','Internationally competitive clusters','knowledge_competence; concentration','Kootaan osaaminen kansainvälisesti kilpailukykyisiksi keskittymiksi.'),
-('GP74','26','causal','Digital, user-centred public services','public-sector productivity','Productivity leap needed for public finances','digital_ict','Toimintatavat uudistaen rakennetaan julkiset palvelut käyttäjälähtöisiksi ja ensisijaisesti digitaalisiksi, jotta julkisen talouden kannalta välttämätön tuottavuusloikka onnistuu.'),
-('GP74','27','causal','Open data and better use of data resources','new business ideas','(implicit) growth','digital_ict; data','Luodaan avoimella datalla ja tietovarantojen paremmalla hyödyntämisellä edellytyksiä uusille liiketoimintaideoille.'),
-('EV2009P','8','causal','Innovation','sustainable source of long-term growth','Economic growth and welfare','innovation_growth','its central role as a sustainable source of long-term economic growth and thus improving welfare'),
-('EV2009P','8','rationale','Failures in the market for information','justifies public innovation policy','Innovation policy','market_failure','Innovation policy is primarily motivated by failures in the market for information (Arrow, 1962).'),
-('EV2009P','8','meta','Theory and empirics of innovation policy','(the panel takes the premises as given)','Weak guidance for policy','meta_theory','we largely took the premises for innovation policy for granted, even if we are fully aware that the underlying theories and empirics remain less-than-satisfactory to effectively guide policymaking'),
-('EV2009P','63','diagnosis','High R&D inputs','structural mismatch','Too few world-class growth firms and products','rd_technology; entrepreneurship_firms','these inputs do not appear to have resulted in equivalent outputs of a greater global supply of world-class, advanced goods and services'),
-('EV2009P','63','diagnosis','Public R&D and support system','returns measured in growth firms','Returns should be higher','rd_technology; entrepreneurship_firms','The returns on Finnish taxpayers’ money invested in public R&D and in the public support system should be higher, if measured in terms of the number of world class HGEFs created.'),
-('EV2009P','63','causal','Internal restructuring of existing firms','adopting new technologies and organisational solutions','Productivity growth','productivity_restructuring','First, productivity grows when existing firms become more productive due to internal restructuring'),
-('EV2009P','63','causal','External restructuring: productive firms and entrants gain share, low-productivity firms exit','reallocation','Productivity growth','productivity_restructuring; competition_markets','Second, external restructuring stimulates productivity growth when higher productivity firms gain market share or when higher productivity entrants replace low productivity firms that eventually exit.'),
-('EV2009P','63','causal','Growth entrepreneurship','drives internal and external restructuring','Productivity growth','entrepreneurship_firms; productivity_restructuring','Growth entrepreneurship is both directly and indirectly a key driver of these two restructuring processes.'),
-('EV2009P','70','diagnosis','Lack of awareness','undervaluing risk-tolerant entrepreneurs','Fewer growth-oriented entrepreneurs','entrepreneurship_firms','risk-tolerant and growth-oriented entrepreneurs appear to be under-valued in Finland'),
-('EV2009P','33','causal','Regionally motivated public R&D funding','misallocation of resources','Diverging regional competitiveness; forgone growth','rd_technology; regional','regionally-motivated public R&D funding seems to contribute to misallocation of resources, which promotes divergence in regional competitiveness'),
-('EV2009P','13','diagnosis','Weak coordination','several organisations chasing the same problem with similar tools','Wasteful replication, institutional clutter','governance_coordination','One consequence of weak coordination within the system is that occasionally several organizations go after the same societal problem (e.g., lacking growth entrepreneurship) with similar tools, which leads to wasteful replication and adds to institutional clutter.'),
-]
-rows=[];bad=0
-for i,(d,p,typ,cause,mech,out,tags,ex) in enumerate(C,1):
-    ok=all(norm(part).strip() in src[d] for part in ex.split('…') if part.strip())
-    if not ok: bad+=1; print('NOT FOUND',d,ex[:70])
-    y,a=meta[d]
-    rows.append({'claim_id':f'C{i:03d}','document_id':d,'year':y,'author':a,'page':p,'claim_type':typ,'cause':cause,'mechanism':mech,'outcome':out,'theory_tags':tags,'excerpt_verbatim':ex,'excerpt_verified':'yes' if ok else 'NO','coder':'Claude (pre-coded)','reviewer_decision':'','reviewer_correction':'','reviewer_notes':''})
-w=csv.DictWriter(open('gold_draft_v0.csv','w',newline='',encoding='utf-8'),fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
-print(len(rows),'claims; not found:',bad)
-from collections import Counter
-print(Counter(r['document_id'] for r in rows)); print(Counter(r['claim_type'] for r in rows))
+"""Check that every excerpt in a claims CSV appears verbatim in its source text.
+
+Usage:
+    python project1/coding/verify_excerpts.py project1/coding/claims_gold_draft_v0.csv
+
+Reads data/text/<document_id>.txt. Only whitespace and line-break hyphens are
+normalised (genuine compounds such as "tutkimus- ja" are kept). '…' in an
+excerpt marks a gap; each part must be found. Writes excerpt_verified back.
+"""
+import csv
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def norm(t: str) -> str:
+    t = re.sub(r"\[\[page \d+\]\]", " ", t)
+    t = re.sub(r"\s+", " ", t)
+    return re.sub(r"([a-zåäö]) ?- (?!(?:ja|sekä|tai|eli|että|kuin|and|or)\b)([a-zåäö])", r"\1\2", t)
+
+
+def main(path: str) -> None:
+    rows = list(csv.DictReader(open(path, encoding="utf-8")))
+    cache, missing = {}, 0
+    for r in rows:
+        d = r["document_id"]
+        if d not in cache:
+            f = ROOT / "data" / "text" / f"{d}.txt"
+            cache[d] = norm(f.read_text(encoding="utf-8")) if f.exists() else None
+        if cache[d] is None:
+            r["excerpt_verified"] = "no text"
+            continue
+        ok = all(norm(p).strip() in cache[d] for p in r["excerpt_verbatim"].split("…") if p.strip())
+        r["excerpt_verified"] = "yes" if ok else "NO"
+        missing += not ok
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        w.writeheader()
+        w.writerows(rows)
+    print(f"{len(rows)} claims checked, {missing} not found")
+
+
+if __name__ == "__main__":
+    main(sys.argv[1])
