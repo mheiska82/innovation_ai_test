@@ -1,0 +1,8 @@
+data/raw/*
+data/text/*
+data/manifest.csv
+.venv/
+__pycache__/
+.env
+!data/raw/.gitkeep
+!data/text/.gitkeep
