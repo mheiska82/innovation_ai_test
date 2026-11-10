@@ -5,9 +5,9 @@ An AI research tool for Finnish innovation-policy history (1960s–today), built
 ## Structure
 
 ```
-corpus/batch1.csv          52 documents: 32 government programmes (1961–2023),
-                           14 Research and Innovation Council reviews/decisions,
-                           3 anchor documents, 3 human benchmarks
+corpus/batch1.csv          Project 1: 32 government programmes (1961–2023), 2 human benchmarks
+project2/                  Project 2: Research and Innovation Council reviews
+                           (own corpus, docs, outputs; see project2/PROJECT2.md)
 db/schema.sql              Postgres + pgvector schema (documents, claims, evidence, entities)
 prompts/claim_extraction.md  Extraction prompt v0.1 and output schema
 scripts/fetch_corpus.py    Downloads the corpus and extracts text
@@ -52,6 +52,10 @@ ocrmypdf -l fin data/raw/<id>.pdf data/raw/<id>.ocr.pdf
 ```bash
 python scripts/vocabulary.py               # government programmes only
 python scripts/vocabulary.py --series all  # every downloaded document
+# Project 2 (Council reviews), each document separately:
+python scripts/fetch_corpus.py project2/corpus/council.csv
+python scripts/vocabulary.py --series council_review --no-pooling --out project2/data
+python project2/scripts/sections.py RC2026
 ```
 
 Counts 23 policy concepts (`vocab/concepts.csv`, Finnish word stems) per document and per decade, as mentions per 10,000 words. Decade rates are pooled, so very short programmes can't swing a decade. Institution names in `vocab/exclude.txt` are removed first (the Research and Innovation Council's name is not a mention of "innovation"). `data/vocabulary_examples.csv` shows matched passages so every number can be checked.

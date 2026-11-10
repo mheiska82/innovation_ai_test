@@ -1,0 +1,16 @@
+1 Johdanto
+2 Toimintaympäristön tilannekuva
+3 Strategisten valintojen tavoitteet
+4 Strategiset valinnat
+4.2  Data ja datapohjainen
+4.3  Murrosteknologiat
+4.4 Terveys ja hyvinvointi
+4.5 Ilmasto, ympäristö
+4.6 Turvallisuus, resilienssi
+5 TKI-järjestelmän kehittämisen kärjet
+5.1 TKI-toiminnan riskinottokyvyn
+5.2 TKI-investointien houkuttelu
+6 Toimeenpano ja seuranta
+7 Valintojen valmistelu
+8 TKI-valintoja muualla
+STOP: Liite: T&K-rahoituksen kokonaisuus

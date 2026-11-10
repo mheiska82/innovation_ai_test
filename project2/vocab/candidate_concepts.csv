@@ -1,0 +1,16 @@
+concept_id,label_en,label_fi,pattern,status
+security,Security,turvallisuus,\b(?:kokonais)?turvallisuu|\bkyberturvallisuu,provisional
+resilience,Resilience,resilienssi,\bresilien,provisional
+defence,Defence,puolustus,\bpuolustu,provisional
+dual_use,Dual use,kaksikäyttöisyys,kaksikäyt,provisional
+data,Data and data-driven value creation,data,\bdata,provisional
+disruptive_tech,Disruptive technologies,murrosteknologiat,\bmurrosteknolog|\bmurroksellis,provisional
+quantum,Quantum technologies,kvanttiteknologiat,\bkvantti,provisional
+semiconductor,Semiconductors and chips,puolijohteet,\bpuolijohte|\bsiru,provisional
+space,Space technologies,avaruusteknologiat,\bavaruus,provisional
+breakthrough,Breakthrough innovation,läpimurtoinnovaatio,\bläpimur,provisional
+risk_taking,Risk-taking,riskinotto,\briskinot,provisional
+rdi_investment_attraction,Attracting RDI investment,TKI-investointien houkuttelu,investointien houkuttel|\btki-investoin|\bt&k-investoin,provisional
+health,Health and wellbeing,terveys ja hyvinvointi,\bterveyde|\bterveys,provisional
+climate,Climate,ilmasto,\bilmasto,provisional
+arctic,Arctic,arktinen,\barktis,provisional

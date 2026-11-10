@@ -1,6 +1,6 @@
 # RC2026 analysed on its own: *Kansalliset TKI-politiikan ja -toiminnan strategiset valinnat*
 
-*Status: 10 November 2026. Tracker v0.1 plus provisional stems (see §4). Part of [Tracing Finland's Innovation State](PROJECT.md).*
+*Status: 10 November 2026. Tracker v0.1 plus provisional stems (see §4). Part of [Project 2: Council reviews](../PROJECT2.md).*
 
 ## 1. The document
 

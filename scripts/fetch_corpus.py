@@ -202,13 +202,15 @@ def main(csv_path: str) -> None:
         results.append({"id": row["id"], "status": status, "detail": detail})
         time.sleep(PAUSE_S)
 
-    with open(MANIFEST, "w", newline="", encoding="utf-8") as f:
+    stem = Path(csv_path).stem
+    manifest = MANIFEST if stem == "batch1" else MANIFEST.with_name(f"manifest_{stem}.csv")
+    with open(manifest, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["id", "status", "detail"])
         w.writeheader()
         w.writerows(results)
 
     ok = sum(r["status"] == "ok" for r in results)
-    print(f"\n{ok}/{len(results)} documents saved. Manifest: {MANIFEST}")
+    print(f"\n{ok}/{len(results)} documents saved. Manifest: {manifest}")
 
 
 if __name__ == "__main__":

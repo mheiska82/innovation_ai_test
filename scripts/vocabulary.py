@@ -3,6 +3,7 @@
 Usage:
     python scripts/vocabulary.py                      # government programmes
     python scripts/vocabulary.py --series all         # every downloaded document
+    python scripts/vocabulary.py --series council_review --no-pooling --out project2/data   # Project 2
 
 Reads data/text/<id>.txt and corpus/*.csv, matches the stem patterns in
 vocab/concepts.csv, and writes:
@@ -86,7 +87,8 @@ def load_exclusions() -> re.Pattern | None:
 
 def load_corpus() -> dict[str, dict]:
     docs = {}
-    for path in sorted((ROOT / "corpus").glob("*.csv")):
+    paths = sorted((ROOT / "corpus").glob("*.csv")) + sorted((ROOT / "project2" / "corpus").glob("*.csv"))
+    for path in paths:
         with open(path, encoding="utf-8") as f:
             for row in csv.DictReader(f):
                 docs[row["id"]] = row
@@ -133,7 +135,11 @@ def check_near_duplicates(texts: dict[str, str], corpus: dict[str, dict], thresh
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--series", default="government_programme", help="corpus series to include, or 'all'")
+    ap.add_argument("--no-pooling", action="store_true", help="skip the pooled decade file (Project 2 analyses each document separately)")
+    ap.add_argument("--out", default=str(OUT), help="output folder (Project 2: project2/data)")
     args = ap.parse_args()
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
 
     concepts, corpus, exclude = load_concepts(), load_corpus(), load_exclusions()
     by_doc, examples = [], []
@@ -191,10 +197,12 @@ def main() -> None:
                 "per_10k_words": round(hits / decade_words[decade] * 10_000, 2),
             })
 
-    for name, rows in [("vocabulary_by_document", by_doc), ("vocabulary_by_decade", by_decade),
-                       ("vocabulary_examples", examples)]:
+    outputs = [("vocabulary_by_document", by_doc), ("vocabulary_examples", examples)]
+    if not args.no_pooling:
+        outputs.insert(1, ("vocabulary_by_decade", by_decade))
+    for name, rows in outputs:
         if rows:
-            with open(OUT / f"{name}.csv", "w", newline="", encoding="utf-8") as f:
+            with open(out / f"{name}.csv", "w", newline="", encoding="utf-8") as f:
                 w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
                 w.writeheader()
                 w.writerows(rows)
