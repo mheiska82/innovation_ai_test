@@ -83,7 +83,7 @@ Each research question is a sub-project with its own method, files and status. A
 | | Question | Status | Main document |
 |---|---|---|---|
 | **1.1 Vocabulary** | Which concepts dominate each decade? | Tracker v0.1, 30 programmes | [1.1_vocabulary/README.md](1.1_vocabulary/README.md) · [Dashboard 1](https://claude.ai/artifact/8K3c4xNdN4Ppdoh8b2S1rr) |
-| **1.2 Paradigms** | When does the theory of prosperity change? | Analysis v3: 560 claims, 10 programmes 1987–2023 + AN2008 fully coded (unvalidated) | [1.2_paradigms/analysis_q2_v3.md](1.2_paradigms/analysis_q2_v3.md) |
+| **1.2 Paradigms** | When does the theory of prosperity change? | Analysis v3: 560 claims, 10 programmes 1987–2023 + AN2008 fully coded (unvalidated) | [1.2_paradigms/analysis_q2_v3.md](1.2_paradigms/analysis_q2_v3.md) · [Dashboard 3](https://claude.ai/artifact/U9PoQKHgZxME1N3U4j6wpZ) |
 | **1.3 Continuity** | Was the start-up ecosystem a continuation or a break? | Planned | [1.3_continuity/README.md](1.3_continuity/README.md) |
 
 Question 4 (the Nokia question) needs firm and start-up data rather than policy documents. It will become a separate project when it starts. Project 1.2 already records the programmes' own framings of Nokia and ICT (hypothesis H2g).

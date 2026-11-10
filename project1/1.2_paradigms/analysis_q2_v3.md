@@ -1,6 +1,6 @@
 # Research question 2, analysis v3: when does Finland's theory of prosperity change?
 
-*Project 1.2. Status: 10 November 2026. Based on 560 claims in [`coding/claims_v0.4.csv`](coding/claims_v0.4.csv), coded under [`coding/CODING_GUIDE.md`](coding/CODING_GUIDE.md) v0.4, with coverage logged in [`coding/scope_v0.4.md`](coding/scope_v0.4.md). Replaces [analysis v2](archive/analysis_q2_v2.md).*
+*Project 1.2. Status: 10 November 2026. Based on 560 claims in [`coding/claims_v0.4.csv`](coding/claims_v0.4.csv), coded under [`coding/CODING_GUIDE.md`](coding/CODING_GUIDE.md) v0.4, with coverage logged in [`coding/scope_v0.4.md`](coding/scope_v0.4.md). Replaces [analysis v2](archive/analysis_q2_v2.md). Interactive view: [Dashboard 3](https://claude.ai/artifact/U9PoQKHgZxME1N3U4j6wpZ) (it rounds halves up, so a few shares differ by one point from the tables here).*
 
 ## 0. The question and how it is answered
 

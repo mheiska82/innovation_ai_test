@@ -11,8 +11,8 @@ It is a personal side project. It uses public data only, with no Business Finlan
 | Documents | 30 *hallitusohjelmat*, 1961–2023 | 15 Council reviews and decisions, 1973–2026 (4 counted so far) |
 | Overview | [project1/PROJECT1.md](project1/PROJECT1.md) | [project2/PROJECT2.md](project2/PROJECT2.md) |
 | Corpus list | [project1/corpus/programmes.csv](project1/corpus/programmes.csv) | [project2/corpus/council.csv](project2/corpus/council.csv) |
-| Results | [Dashboard 1](https://claude.ai/artifact/8K3c4xNdN4Ppdoh8b2S1rr) | [Dashboard 2](https://claude.ai/artifact/QuE38nxXvvPoXBvLtKEMpB) |
-| Sub-projects | [1.1 Vocabulary](project1/1.1_vocabulary/README.md) · [1.2 Paradigms (theory of prosperity, analysis v3)](project1/1.2_paradigms/analysis_q2_v3.md) · [1.3 Continuity (planned)](project1/1.3_continuity/README.md) | [project2/docs/](project2/docs/) |
+| Results | [Dashboard 1](https://claude.ai/artifact/8K3c4xNdN4Ppdoh8b2S1rr) (vocabulary) · [Dashboard 3](https://claude.ai/artifact/U9PoQKHgZxME1N3U4j6wpZ) (theory of prosperity) | [Dashboard 2](https://claude.ai/artifact/QuE38nxXvvPoXBvLtKEMpB) |
+| Sub-projects | [1.1 Vocabulary](project1/1.1_vocabulary/README.md) · [1.2 Paradigms (theory of prosperity, analysis v3)](project1/1.2_paradigms/analysis_q2_v3.md) · [Dashboard 3](https://claude.ai/artifact/U9PoQKHgZxME1N3U4j6wpZ) · [1.3 Continuity (planned)](project1/1.3_continuity/README.md) | [project2/docs/](project2/docs/) |
 
 The two series are different genres: coalition agreements versus expert policy guidelines. They are analysed separately, and compared only government by government.
 
