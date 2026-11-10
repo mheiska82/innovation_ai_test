@@ -1,0 +1,9 @@
+# Institution and body names removed before counting concepts.
+# They are tracked as entities, not as policy vocabulary. One stem per line.
+tutkimus- ja innovaationeuvost
+tiede- ja teknologianeuvost
+valtion tiedeneuvost
+tiedeneuvost
+innovaatiorahoituskeskus
+teknologian kehittämiskeskus
+teknologian tutkimuskeskus

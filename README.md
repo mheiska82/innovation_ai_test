@@ -47,6 +47,17 @@ OCR for scanned PDFs (flagged `needs_ocr` in `data/manifest.csv`):
 ocrmypdf -l fin data/raw/<id>.pdf data/raw/<id>.ocr.pdf
 ```
 
+## Vocabulary tracker
+
+```bash
+python scripts/vocabulary.py               # government programmes only
+python scripts/vocabulary.py --series all  # every downloaded document
+```
+
+Counts 23 policy concepts (`vocab/concepts.csv`, Finnish word stems) per document and per decade, as mentions per 10,000 words. Decade rates are pooled, so very short programmes can't swing a decade. Institution names in `vocab/exclude.txt` are removed first (the Research and Innovation Council's name is not a mention of "innovation"). `data/vocabulary_examples.csv` shows matched passages so every number can be checked.
+
+Edit the stems in `concepts.csv` freely: add a `|`-separated variant, re-run, compare.
+
 ## Ground rules
 
 - Public sources only; no Business Finland internal data or code.

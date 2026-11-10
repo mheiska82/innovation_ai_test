@@ -1,0 +1,24 @@
+concept_id,label_en,label_fi,group,patterns
+industrial_policy,Industrial policy,teollisuuspolitiikka,old_paradigm,teollisuuspolit|elinkeinopolit|teollistami
+technology_policy,Technology policy,teknologiapolitiikka,old_paradigm,teknologiapolit|tiede- ja teknologiapolit
+science_policy,Science policy,tiedepolitiikka,old_paradigm,tiedepolit|tutkimuspolit
+research_development,R&D,tutkimus ja kehitys,core,tutkimus- ja kehit|tutkimus- ja tuotekehit|tuotekehit|t&k|t & k
+innovation,Innovation (any),innovaatio,core,innovaati|innovatiivi
+national_innovation_system,National innovation system,kansallinen innovaatiojärjestelmä,nis_era,innovaatiojärjestelm|kansallinen innovaatio
+knowledge_competence,Knowledge and competence,osaaminen,nis_era,osaamis|osaaminen|osaamiseen|tietoon perustuv|osaamiseen perustuv
+information_society,Information society,tietoyhteiskunta,nis_era,tietoyhteiskun|informaatioyhteiskun
+cluster,Clusters and centres of expertise,klusteri,nis_era,klusteri|osaamiskeskit|osaamiskeskus|huippuosaamiskeski
+competitiveness,Competitiveness,kilpailukyky,cross_cutting,kilpailuky|kilpailukykyi
+internationalisation,Internationalisation,kansainvälistyminen,cross_cutting,kansainvälisty|kansainvälistä
+entrepreneurship,Entrepreneurship,yrittäjyys,new_paradigm,yrittäjyy|yrittäjämyönt|yrittäjäkulttuur
+growth_companies,Growth companies,kasvuyritys,new_paradigm,kasvuyrit|kasvuhakuis|kasvuyhtiö
+startup,Start-ups,startup-yritys,new_paradigm,startup|start-up|start up|aloittav|uusien yritysten
+commercialisation,Commercialisation,kaupallistaminen,new_paradigm,kaupallista|tutkimustulosten hyödyntämi
+venture_capital,Venture capital,pääomasijoitus,new_paradigm,pääomasijoit|riskipääom|riskirahoit|pääomarahast
+ecosystem,Ecosystem,ekosysteemi,new_paradigm,ekosystee
+rdi,RDI (TKI),tutkimus-kehittämis- ja innovaatiotoiminta,new_paradigm,"tki-|tki-toimin|tutkimus-, kehittämis- ja innovaatio"
+digitalisation,Digitalisation,digitalisaatio,new_paradigm,digitalisa|digitaali|datatalou
+artificial_intelligence,Artificial intelligence,tekoäly,new_paradigm,tekoäly
+deep_tech,Deep tech,syväteknologia,new_paradigm,syväteknolog|deep tech
+sustainability,Sustainability and green transition,kestävä kehitys,new_paradigm,kestävä kehity|kestävän kehity|kestävää kehity|kestävä kasvu|kestävän kasvu|kestävää kasvu|hiilineutraal|vihreä siirtymä|vihreän siirtymän
+rd_target,R&D spending target,T&K-menotavoite,cross_cutting,prosenttia bruttokansantuottee|prosentin bruttokansantuote|% bkt|prosenttiin bkt|prosentin osuuteen bruttokansantuotteesta
