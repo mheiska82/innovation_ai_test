@@ -8,9 +8,9 @@ Usage:
 Reads data/text/<id>.txt and project*/corpus/*.csv, matches the stem patterns in
 vocab/concepts.csv, and writes:
 
-    project1/data/vocabulary_by_document.csv   one row per document x concept
-    project1/data/vocabulary_by_decade.csv     pooled rate per decade x concept
-    project1/data/vocabulary_examples.csv      up to 3 matched passages per concept and
+    project1/1.1_vocabulary/data/vocabulary_by_document.csv   one row per document x concept
+    project1/1.1_vocabulary/data/vocabulary_by_decade.csv     pooled rate per decade x concept
+    project1/1.1_vocabulary/data/vocabulary_examples.csv      up to 3 matched passages per concept and
                                       decade, so every number can be checked
 
 Rates are mentions per 10,000 words. Decade rates are pooled (all mentions
@@ -32,7 +32,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TEXT = ROOT / "data" / "text"
-OUT = ROOT / "project1" / "data"  # Project 1 default; Project 2 passes --out project2/data
+OUT = ROOT / "project1" / "1.1_vocabulary" / "data"  # Project 1 default; Project 2 passes --out project2/data
 WORD = re.compile(r"[\wåäöÅÄÖ&-]+", re.UNICODE)
 
 

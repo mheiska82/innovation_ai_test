@@ -1,6 +1,6 @@
 # Coding guide: theory-of-prosperity claims (research question 2)
 
-*Project 1. Status: 10 November 2026. Version 0.2.*
+*Project 1.2. Status: 10 November 2026. Version 0.3 (full coding of five programmes; see §4c).*
 
 > **Decision (10.11.2026):** the claims are coded by Claude only (single coder). There is no human gold standard for now. As a result, results are labelled *unvalidated*, and AI extraction can't be scored against this set: scoring it would be Claude grading Claude. A human spot-check of a sample remains the way to validate it later.
 
@@ -31,11 +31,12 @@ Each claim is coded as **cause (X) → mechanism (M) → outcome (Y)**. The mech
 | `mechanism` (M) | The mediator, **only if the text states it**; otherwise left empty |
 | `condition` | A moderator or scope condition (for example "pieni avoin talous", "jatkossakin"), only if stated |
 | `outcome` (Y) | The prosperity outcome. Required |
-| `direction` | `+` · `−`, with "(broken chain)" or "(mismatch)" where the text says a link fails |
+| `direction` | `+` · `−` · `?` (doubt about a link, v0.3), with "(broken chain)" or "(mismatch)" where the text says a link fails |
 | `link_to` | The ID or IDs of claims this one builds on (chains, as in C024 → C025, or C042 + C043 → C044) |
 | `inferred` | Which fields the coder supplied rather than the text, if any |
 | `theory_tags` | From the codebook in §3 |
-| `excerpt_verbatim`, `excerpt_verified` | The exact source words; checked by `verify_excerpts.py` |
+| `excerpt_verbatim`, `excerpt_verified` | The exact source words; checked by `verify_excerpts.py`: `yes` (whitespace-normalised match) or `yes (PDF spacing)` (letter-for-letter match once the PDF text layer's split words are joined) |
+| `coverage` (v0.3) | `key section (v0.2)` · `read in full` · `screened chapter`: how the claim's chapter was covered (see `scope_v0.3.md`) |
 | `coder`, `validation` | `Claude`; `unvalidated (single coder)` |
 | `weight` (v0.2) | `core`, or `low` for vision rhetoric, agenda-setting, or outcomes outside market prosperity. Low-weight claims are left out of the engine counts |
 | `expert_review` (v0.2) | A review pass written from the stance of an innovation researcher and a policy-maker: `ACCEPT` · `EDIT` · `REJECT` · `ADDED`, with a reason |
@@ -71,6 +72,11 @@ Each claim is coded as **cause (X) → mechanism (M) → outcome (Y)**. The mech
 | `growth_to_welfare` | growth as the basis for the welfare state |
 | `sector_choice` | specific sectors as growth engines (bioeconomy, cleantech) |
 | `council_link` | the programme explicitly relies on a Council document (a link to Project 2) |
+| `labour_market` (v0.3) | labour supply, matching, activation, incentives to work |
+| `demand_management` (v0.3) | fiscal stimulus, purchasing power, aggregate demand |
+| `growth_employment` (v0.3) | economic growth itself as the source of jobs |
+| `health_wellbeing` (v0.3) | population health and well-being as a competitive factor |
+| `state_ownership` (v0.3) | state ownership as a growth instrument |
 | `governance_coordination`, `regional`, `experimentation`, `meta_theory` | as named |
 
 The codebook is expected to change after review. Tags may be merged or split, but every change is logged here.
@@ -102,9 +108,29 @@ A second pass by Claude reviewed every claim from the stance of an innovation re
 
 **This is not independent validation.** The same model coded and reviewed the claims. The review improves consistency, but a human check is still needed.
 
+
+## 4c. Full coding (v0.3)
+
+**Why.** v0.2 read only key sections, which were mostly the innovation chapters. That risked overstating R&D and missing labour, cost and regional claims. v0.3 codes five programmes (GP64, GP68, GP70, GP72, GP74) under one protocol, so that their shares can be compared.
+
+**Protocol.**
+1. **Read in full:** every chapter on the economy, business and innovation, labour and working life, education and science, regions, energy and ownership. Policy programmes and annexes on tax are included.
+2. **Screened:** all other chapters. Every sentence with an economic-outcome word is read in context. The screen alone found 25 of 41 hand-coded claims in a test, so it is used only outside the economic core.
+3. **Scope rule.** A sentence is coded when it links a driver to an economic outcome (growth, productivity, competitiveness, employment, exports, innovation, structural renewal, welfare-state financing).
+   - **Bare action items with no stated outcome are not coded.**
+   - **A repeated claim is coded once**, at its first or fullest statement.
+   - **EU-level claims are out of scope.** One exception (C270) is coded low and flagged.
+4. **Budget annexes:** R&D cuts in a savings annex are coded as instruments with direction `−` (C274, C275), because they are the evidence for the 2015 break.
+5. **Existing v0.2 claims are kept with their IDs.** New claims are C053–C275.
+6. **Weights** follow v0.2: `low` for vision rhetoric, purely fiscal or social outcomes, minor sector claims and immigration-as-labour-supply. Low-weight claims are left out of engine counts.
+
+**Result.** 275 claims (242 core), all excerpts verified (184 `yes`, 91 `yes (PDF spacing)`). The coverage log is `scope_v0.3.md`, and the analysis is `../analysis_q2_v2.md`.
+
+**Review column.** For new claims, `expert_review` holds the same reviewer stance as v0.2 (`ADDED (full coding)` for 2003/2015 additions, `ACCEPT` for 2007/2011), with a note on why the claim matters. Coding and review are by the same model, so this is not independent validation.
+
 ## 5. Review procedure (for a later human spot-check)
 
 1. Read each row against its source passage, and set `reviewer_decision`.
 2. Add missed claims as new rows.
 3. Note every disagreement about type or tag in `reviewer_notes`. These feed codebook v1.
-4. The reviewed file becomes `claims_gold_v1.csv`, the test set for the AI extraction. Results are reported as precision (how many AI claims are correct) and recall (how many gold claims the AI found).
+4. The reviewed file (from `claims_v0.3.csv`) becomes `claims_gold_v1.csv`, the test set for the AI extraction. Results are reported as precision (how many AI claims are correct) and recall (how many gold claims the AI found).

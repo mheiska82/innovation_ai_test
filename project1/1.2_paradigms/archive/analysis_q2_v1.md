@@ -1,5 +1,7 @@
 # Research question 2, analysis v1: has Finland's theory of prosperity changed?
 
+> **Archived.** Superseded by [analysis v2](../analysis_q2_v2.md) (full coding, claims v0.3). Links below point to the old layout (`coding/claims_v0.2.csv` is now `archive/claims_v0.2.csv`).
+
 *Project 1. Status: 10 November 2026. Based on 52 claims in [`coding/claims_v0.2.csv`](coding/claims_v0.2.csv), coded under [`coding/CODING_GUIDE.md`](coding/CODING_GUIDE.md) v0.2. Replaces analysis v0.*
 
 ## 0. The question and how it is answered
