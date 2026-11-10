@@ -74,6 +74,33 @@ def snippet(text: str, start: int, end: int, width: int = 90) -> str:
     return ("…" if a else "") + " ".join(text[a:b].split()) + ("…" if b < len(text) else "")
 
 
+def shingles(text: str, n: int = 5) -> set[tuple[str, ...]]:
+    words = [w.lower() for w in WORD.findall(text)]
+    return {tuple(words[i:i + n]) for i in range(len(words) - n + 1)}
+
+
+def check_near_duplicates(texts: dict[str, str], corpus: dict[str, dict], threshold: float = 0.5) -> None:
+    """Warn when a programme largely repeats the previous one.
+
+    Containment = share of the shorter document's 5-word sequences that also
+    appear in the longer one. Above the threshold, consider marking the later
+    document same_as:<earlier id> in the corpus CSV so it is counted once.
+    """
+    ids = sorted((i for i in texts if corpus[i]["series"] == "government_programme"),
+                 key=lambda i: corpus[i]["date"])
+    found = False
+    for a, b in zip(ids, ids[1:]):
+        sa, sb = shingles(texts[a]), shingles(texts[b])
+        if not sa or not sb:
+            continue
+        containment = len(sa & sb) / min(len(sa), len(sb))
+        if containment >= threshold:
+            found = True
+            print(f"  near-duplicate: {b} repeats {containment:.0%} of {a} -> consider url_status same_as:{a}")
+    if not found:
+        print("  no near-duplicate programmes found")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--series", default="government_programme", help="corpus series to include, or 'all'")
@@ -85,6 +112,7 @@ def main() -> None:
     decade_hits: dict[tuple[int, str], int] = defaultdict(int)
     decade_docs: dict[int, list[str]] = defaultdict(list)
     seen_examples: dict[tuple[int, str], int] = defaultdict(int)
+    texts: dict[str, str] = {}
 
     for path in sorted(TEXT.glob("*.txt")):
         doc_id = path.stem
@@ -97,6 +125,7 @@ def main() -> None:
         if year is None:
             continue
         text = re.sub(r"\[\[page \d+\]\]", " ", path.read_text(encoding="utf-8"))
+        texts[doc_id] = text
         n_words = len(WORD.findall(text))  # counted before exclusions
         if exclude:
             text = exclude.sub(" [INSTITUTION] ", text)
@@ -139,6 +168,9 @@ def main() -> None:
                 w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
                 w.writeheader()
                 w.writerows(rows)
+
+    print("Duplicate check:")
+    check_near_duplicates(texts, corpus)
 
     # Console summary: top concepts per decade
     print(f"{'decade':<8}{'docs':>5}{'words':>8}  top concepts (per 10k words)")
