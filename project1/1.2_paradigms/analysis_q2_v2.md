@@ -29,6 +29,12 @@
 
 **Status.** One model coded and reviewed every claim, and no human has checked them. The counts are signals, not statistics.
 
+**Coverage gap (noted 11.11.2026).** v2 stops at 2015. It can date when R&D stops being the stated engine, but not whether that is a lasting break or a dip: the programmes after Sipilä are not coded yet.
+- **GP75** (Rinne 2019, also used by Marin) has not been uploaded to the workspace.
+- **GP77** (Orpo 2023) arrived on 11.11.2026 and is next in the coding queue.
+
+Both matter because R&D returns as a policy goal in that period: the 4 % target in 2019 and the R&D funding law of 2022 (Project 2, AN2022). The 1990s programmes (GP65 Aho 1991, GP66 Lipponen 1995, GP67 Lipponen II 1999) are also not coded, so the jump from 1987 to 2003 hides the decade when the national innovation system arrived. The short continuation programmes GP71 (Kiviniemi 2010) and GP73 (Stubb 2014) are left out on purpose.
+
 ## 1. Evidence: dating the R&D engine
 
 R&D claims with a positive, economy-wide effect, as distinct from sector-specific R&D or budget cuts:
