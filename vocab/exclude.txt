@@ -7,3 +7,5 @@ tiedeneuvost
 innovaatiorahoituskeskus
 teknologian kehittämiskeskus
 teknologian tutkimuskeskus
+# PDF artefact: "Tu tkimus" splits Tutkimus; the fragment would match the RDI stem "tki"
+tkimus
