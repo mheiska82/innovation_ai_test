@@ -8,7 +8,7 @@ It is a personal side project. It uses public data only, with no Business Finlan
 
 | | Project 1: Government programmes | Project 2: Research and Innovation Council reviews |
 |---|---|---|
-| Documents | 30 *hallitusohjelmat*, 1961–2023 | 15 Council reviews and decisions, 1973–2026 (3 counted so far) |
+| Documents | 30 *hallitusohjelmat*, 1961–2023 | 15 Council reviews and decisions, 1973–2026 (4 counted so far) |
 | Overview | [project1/PROJECT1.md](project1/PROJECT1.md) | [project2/PROJECT2.md](project2/PROJECT2.md) |
 | Corpus list | [project1/corpus/programmes.csv](project1/corpus/programmes.csv) | [project2/corpus/council.csv](project2/corpus/council.csv) |
 | Results | [Dashboard 1](https://claude.ai/artifact/8K3c4xNdN4Ppdoh8b2S1rr) | [Dashboard 2](https://claude.ai/artifact/QuE38nxXvvPoXBvLtKEMpB) |
