@@ -1,69 +1,86 @@
 # Tracing Finland's Innovation State
 
-An AI research tool for Finnish innovation-policy history (1960s–today), built on public documents only. Every claim links to the exact passage that supports it.
+An AI research tool for Finnish innovation-policy history (1960s–today), built on public documents only. Every number links to the exact passages it counts.
 
-## Structure
+It is a personal side project. It uses public data only, with no Business Finland internal data or code, and it does not profile named individuals.
+
+## Two projects
+
+| | Project 1: Government programmes | Project 2: Research and Innovation Council reviews |
+|---|---|---|
+| Documents | 30 *hallitusohjelmat*, 1961–2023 | 15 Council reviews and decisions, 1973–2026 (2 counted so far) |
+| Overview | [project1/PROJECT1.md](project1/PROJECT1.md) | [project2/PROJECT2.md](project2/PROJECT2.md) |
+| Corpus list | [project1/corpus/programmes.csv](project1/corpus/programmes.csv) | [project2/corpus/council.csv](project2/corpus/council.csv) |
+| Results | [Dashboard 1](https://claude.ai/artifact/8K3c4xNdN4Ppdoh8b2S1rr) | [Dashboard 2](https://claude.ai/artifact/QuE38nxXvvPoXBvLtKEMpB) |
+| Analyses | in PROJECT1.md | [project2/docs/](project2/docs/) |
+
+The two series are different genres: coalition agreements versus expert policy guidelines. They are analysed separately, and compared only government by government.
+
+## Repository layout
 
 ```
-corpus/batch1.csv          Project 1: 32 government programmes (1961–2023), 2 human benchmarks
-project2/                  Project 2: Research and Innovation Council reviews
-                           (own corpus, docs, outputs; see project2/PROJECT2.md)
-db/schema.sql              Postgres + pgvector schema (documents, claims, evidence, entities)
-prompts/claim_extraction.md  Extraction prompt v0.1 and output schema
-scripts/fetch_corpus.py    Downloads the corpus and extracts text
-data/                      raw/ and text/ (git-ignored)
+README.md                      this overview
+project1/                      Project 1: government programmes
+  PROJECT1.md                  description, method, results
+  corpus/programmes.csv        corpus list (32 programmes, 2 human benchmarks)
+  data/                        tracker outputs
+project2/                      Project 2: Council reviews
+  PROJECT2.md                  description, corpus gaps, method, results
+  corpus/council.csv           corpus list (15 Council documents, 4 anchors, 1 benchmark)
+  docs/                        document analyses (RC2026; RC2026 chapters 5–6)
+  data/                        tracker outputs, chapter counts, passages
+  scripts/sections.py          chapter-level counts
+  vocab/                       provisional candidate concepts, chapter headings
+scripts/                       shared: fetch_corpus.py (download + text), vocabulary.py (tracker)
+vocab/                         shared: concepts.csv (23 concepts), exclude.txt (institution names)
+prompts/claim_extraction.md    shared: LLM extraction prompt (stage 2)
+db/schema.sql                  shared: claims-and-evidence database (stage 2)
+data/raw, data/text            downloaded documents and extracted text (git-ignored, shared)
 ```
-
-## Corpus status (batch 1)
-
-`url_status` in the CSV:
-
-- `verified`: link confirmed (16)
-- `pattern`: government programme URL built from the site's pattern; the script falls back to the index page if it fails (11)
-- `locate`: title known, link still to find (22); mostly post-2003 programmes and Council reviews
-- `library`: catalogue record only; request or scan via the National Library (3)
-
-The benchmark rows (Eela 2001, Lemola 2001, Lemola 2020) are not corpus. They are human analyses to compare the AI's findings against.
 
 ## Setup
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python scripts/fetch_corpus.py corpus/batch1.csv
 ```
 
-Database (when you reach extraction):
+## Running
 
 ```bash
-createdb innovation_state
-psql -d innovation_state -f db/schema.sql
+# Project 1: government programmes
+python scripts/fetch_corpus.py project1/corpus/programmes.csv
+python scripts/vocabulary.py                    # writes project1/data/
+
+# Project 2: Council reviews, each document separately
+python scripts/fetch_corpus.py project2/corpus/council.csv
+python scripts/vocabulary.py --series council_review --no-pooling --out project2/data
+python project2/scripts/sections.py RC2026
 ```
 
-OCR for scanned PDFs (flagged `needs_ocr` in `data/manifest.csv`):
+A PDF saved by hand as `data/raw/<ID>.pdf` (for example `data/raw/RC2014.pdf`) always takes priority over the web address in the corpus list. Each run writes a log to `data/manifest_<corpus name>.csv`.
+
+**OCR for scanned PDFs** (flagged `needs_ocr` in the log):
 
 ```bash
 # macOS: brew install ocrmypdf tesseract-lang
 ocrmypdf -l fin data/raw/<id>.pdf data/raw/<id>.ocr.pdf
 ```
 
-## Vocabulary tracker
+**Database** (for the claim-extraction stage):
 
 ```bash
-python scripts/vocabulary.py               # government programmes only
-python scripts/vocabulary.py --series all  # every downloaded document
-# Project 2 (Council reviews), each document separately:
-python scripts/fetch_corpus.py project2/corpus/council.csv
-python scripts/vocabulary.py --series council_review --no-pooling --out project2/data
-python project2/scripts/sections.py RC2026
+createdb innovation_state
+psql -d innovation_state -f db/schema.sql
 ```
 
-Counts 23 policy concepts (`vocab/concepts.csv`, Finnish word stems) per document and per decade, as mentions per 10,000 words. Decade rates are pooled, so very short programmes can't swing a decade. Institution names in `vocab/exclude.txt` are removed first (the Research and Innovation Council's name is not a mention of "innovation"). `data/vocabulary_examples.csv` shows matched passages so every number can be checked.
+## The vocabulary tracker
 
-Edit the stems in `concepts.csv` freely: add a `|`-separated variant, re-run, compare.
+It counts 23 policy concepts (`vocab/concepts.csv`, Finnish word stems) as mentions per 10,000 words. Institution names in `vocab/exclude.txt` are removed first; for example, the Research and Innovation Council's name is not a mention of "innovation". The example-passage outputs show the matched text, so every number can be checked. To try a change, add a `|`-separated variant to a stem in `concepts.csv`, re-run and compare.
 
 ## Ground rules
 
 - Public sources only; no Business Finland internal data or code.
 - No profiling of named individuals: institutions and roles only.
 - Evidence, extracted relations and interpretations are stored as separate layers.
+- Corpus gaps are stated openly (see project2/PROJECT2.md).

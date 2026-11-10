@@ -1,6 +1,6 @@
 # Project 2: the Research and Innovation Council reviews
 
-*Part of [Tracing Finland's Innovation State](../docs/PROJECT.md). Status: 10 November 2026. Public documents only.*
+*Part of [Tracing Finland's Innovation State](../project1/PROJECT1.md). Status: 10 November 2026. Public documents only.*
 
 - **Dashboard 2:** [Council reviews](https://claude.ai/artifact/QuE38nxXvvPoXBvLtKEMpB). It is a skeleton: 2 of 15 Council documents are counted so far.
 - **Code:** shared with Project 1 (`scripts/`), plus `project2/scripts/`.

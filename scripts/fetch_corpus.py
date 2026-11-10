@@ -1,10 +1,11 @@
 """Fetch the corpus listed in a CSV and save raw files plus extracted text.
 
 Usage:
-    python scripts/fetch_corpus.py corpus/batch1.csv
+    python scripts/fetch_corpus.py project1/corpus/programmes.csv   # Project 1
+    python scripts/fetch_corpus.py project2/corpus/council.csv      # Project 2
 
 For each row with a URL it downloads the page or PDF to data/raw/, extracts
-plain text to data/text/<id>.txt and writes a manifest (data/manifest.csv)
+plain text to data/text/<id>.txt and writes a manifest (data/manifest_<corpus name>.csv)
 recording what worked. Government programmes whose URL is missing or broken
 are looked up on the valtioneuvosto.fi index page by their number.
 
@@ -203,7 +204,7 @@ def main(csv_path: str) -> None:
         time.sleep(PAUSE_S)
 
     stem = Path(csv_path).stem
-    manifest = MANIFEST if stem == "batch1" else MANIFEST.with_name(f"manifest_{stem}.csv")
+    manifest = MANIFEST.with_name(f"manifest_{stem}.csv")
     with open(manifest, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["id", "status", "detail"])
         w.writeheader()
@@ -214,4 +215,4 @@ def main(csv_path: str) -> None:
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else str(ROOT / "corpus" / "batch1.csv"))
+    main(sys.argv[1] if len(sys.argv) > 1 else str(ROOT / "project1" / "corpus" / "programmes.csv"))

@@ -5,12 +5,12 @@ Usage:
     python scripts/vocabulary.py --series all         # every downloaded document
     python scripts/vocabulary.py --series council_review --no-pooling --out project2/data   # Project 2
 
-Reads data/text/<id>.txt and corpus/*.csv, matches the stem patterns in
+Reads data/text/<id>.txt and project*/corpus/*.csv, matches the stem patterns in
 vocab/concepts.csv, and writes:
 
-    data/vocabulary_by_document.csv   one row per document x concept
-    data/vocabulary_by_decade.csv     pooled rate per decade x concept
-    data/vocabulary_examples.csv      up to 3 matched passages per concept and
+    project1/data/vocabulary_by_document.csv   one row per document x concept
+    project1/data/vocabulary_by_decade.csv     pooled rate per decade x concept
+    project1/data/vocabulary_examples.csv      up to 3 matched passages per concept and
                                       decade, so every number can be checked
 
 Rates are mentions per 10,000 words. Decade rates are pooled (all mentions
@@ -32,7 +32,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TEXT = ROOT / "data" / "text"
-OUT = ROOT / "data"
+OUT = ROOT / "project1" / "data"  # Project 1 default; Project 2 passes --out project2/data
 WORD = re.compile(r"[\wåäöÅÄÖ&-]+", re.UNICODE)
 
 
@@ -87,7 +87,7 @@ def load_exclusions() -> re.Pattern | None:
 
 def load_corpus() -> dict[str, dict]:
     docs = {}
-    paths = sorted((ROOT / "corpus").glob("*.csv")) + sorted((ROOT / "project2" / "corpus").glob("*.csv"))
+    paths = sorted(ROOT.glob("project*/corpus/*.csv"))
     for path in paths:
         with open(path, encoding="utf-8") as f:
             for row in csv.DictReader(f):
