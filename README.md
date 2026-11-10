@@ -12,7 +12,7 @@ It is a personal side project. It uses public data only, with no Business Finlan
 | Overview | [project1/PROJECT1.md](project1/PROJECT1.md) | [project2/PROJECT2.md](project2/PROJECT2.md) |
 | Corpus list | [project1/corpus/programmes.csv](project1/corpus/programmes.csv) | [project2/corpus/council.csv](project2/corpus/council.csv) |
 | Results | [Dashboard 1](https://claude.ai/artifact/8K3c4xNdN4Ppdoh8b2S1rr) | [Dashboard 2](https://claude.ai/artifact/QuE38nxXvvPoXBvLtKEMpB) |
-| Analyses | in PROJECT1.md | [project2/docs/](project2/docs/) |
+| Analyses | [Question 2: theory of prosperity](project1/analysis_q2_v1.md) | [project2/docs/](project2/docs/) |
 
 The two series are different genres: coalition agreements versus expert policy guidelines. They are analysed separately, and compared only government by government.
 
@@ -23,6 +23,8 @@ README.md                      this overview
 project1/                      Project 1: government programmes
   PROJECT1.md                  description, method, results
   corpus/programmes.csv        corpus list (32 programmes, 2 human benchmarks, 5 context documents)
+  analysis_q2_v1.md            research question 2: has the theory of prosperity changed?
+  coding/                      claim coding guide, coded claims, excerpt checker
   data/                        tracker outputs
 project2/                      Project 2: Council reviews
   PROJECT2.md                  description, corpus gaps, method, results

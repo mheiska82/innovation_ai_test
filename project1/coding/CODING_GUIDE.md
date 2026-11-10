@@ -1,6 +1,6 @@
 # Coding guide: theory-of-prosperity claims (research question 2)
 
-*Project 1. Status: 10 November 2026. Version 0.1.*
+*Project 1. Status: 10 November 2026. Version 0.2.*
 
 > **Decision (10.11.2026):** the claims are coded by Claude only (single coder). There is no human gold standard for now. As a result, results are labelled *unvalidated*, and AI extraction can't be scored against this set: scoring it would be Claude grading Claude. A human spot-check of a sample remains the way to validate it later.
 
@@ -37,6 +37,8 @@ Each claim is coded as **cause (X) → mechanism (M) → outcome (Y)**. The mech
 | `theory_tags` | From the codebook in §3 |
 | `excerpt_verbatim`, `excerpt_verified` | The exact source words; checked by `verify_excerpts.py` |
 | `coder`, `validation` | `Claude`; `unvalidated (single coder)` |
+| `weight` (v0.2) | `core`, or `low` for vision rhetoric, agenda-setting, or outcomes outside market prosperity. Low-weight claims are left out of the engine counts |
+| `expert_review` (v0.2) | A review pass written from the stance of an innovation researcher and a policy-maker: `ACCEPT` · `EDIT` · `REJECT` · `ADDED`, with a reason |
 
 **Changes from v0:**
 - Mechanisms I had inferred are removed. 10 of the 47 claims now have a stated mechanism.
@@ -55,7 +57,8 @@ Each claim is coded as **cause (X) → mechanism (M) → outcome (Y)**. The mech
 | `commercialisation` | turning research into products and markets |
 | `competition_markets` | competition and market selection |
 | `productivity_restructuring` | reallocation, firm entry and exit, internal restructuring |
-| `competitiveness_exports` | cost and price competitiveness, exports, an open economy |
+| `cost_competitiveness` | cost and price competitiveness (unit labour costs, incomes policy) |
+| `export_competitiveness` | exports, success in international competition, a small open economy |
 | `labour_consensus` | labour-market cooperation, incomes policy, working life |
 | `macro_stability` | stable macroeconomic policy |
 | `deregulation_reform` | removing rigidities, regulation and administration; structural reforms |
@@ -66,6 +69,8 @@ Each claim is coded as **cause (X) → mechanism (M) → outcome (Y)**. The mech
 | `concentration` | concentrating resources into clusters or critical mass |
 | `market_failure` | the public role justified by market failure |
 | `growth_to_welfare` | growth as the basis for the welfare state |
+| `sector_choice` | specific sectors as growth engines (bioeconomy, cleantech) |
+| `council_link` | the programme explicitly relies on a Council document (a link to Project 2) |
 | `governance_coordination`, `regional`, `experimentation`, `meta_theory` | as named |
 
 The codebook is expected to change after review. Tags may be merged or split, but every change is logged here.
@@ -80,6 +85,22 @@ The codebook is expected to change after review. Tags may be merged or split, bu
   - **The draft is therefore not exhaustive**, and the reviewer's added rows are what will show how much was missed.
 - **Pre-coded by Claude, not yet reviewed.** It is a draft gold standard only, until the reviewer has gone through every row.
 - **Every excerpt was checked by script**: 47 out of 47 were found verbatim.
+
+## 4b. Review pass (v0.2)
+
+A second pass by Claude reviewed every claim from the stance of an innovation researcher and a policy-maker. It recorded each decision in the `expert_review` column, and the results were:
+
+- 43 claims accepted.
+- 4 edited, with the edits applied:
+  - C005: tag added.
+  - C006: type changed to `instrument`.
+  - C010: excerpt extended and tag added.
+  - C030: competitiveness reclassified as cost competitiveness.
+- 5 missed claims added (C048–C052).
+- 6 claims given low weight.
+- The `competitiveness_exports` tag was split into `cost_competitiveness` and `export_competitiveness`, because "kilpailukyky" means different things in different periods.
+
+**This is not independent validation.** The same model coded and reviewed the claims. The review improves consistency, but a human check is still needed.
 
 ## 5. Review procedure (for a later human spot-check)
 

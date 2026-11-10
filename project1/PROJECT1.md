@@ -26,7 +26,7 @@ It is a personal side project. It uses public data only, with no Business Finlan
 3. **Continuity or break.** Was the start-up ecosystem a continuation of the older innovation system, or a break from it?
 4. **The Nokia question.** Through which mechanisms did Nokia's rise and decline shape Finnish start-ups?
 
-This document reports on question 1, the first stage. A first, unvalidated analysis of question 2, based on 47 coded claims, is in [analysis_q2_v0.md](analysis_q2_v0.md).
+This document reports on question 1, the first stage. An analysis of question 2 (v1, unvalidated), based on 52 coded and reviewed claims, is in [analysis_q2_v1.md](analysis_q2_v1.md).
 
 ## 3. Data
 
