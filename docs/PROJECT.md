@@ -68,8 +68,8 @@ The corpus is incomplete, and the gaps are not random. They should be read as pa
 | Gap | Documents | Why | Consequence |
 |---|---|---|---|
 | **Council reviews 1973–2000** | Tiedeneuvosto reviews 1973–1986; Tiede- ja teknologianeuvosto reviews 1987, 1990, 1993, 1996, 2000 (rows RC1973–RC2000) | Available only in print or as library scans. I currently have no library access, so they cannot be checked or digitised. | No expert-advisory voice for the first four decades. Questions like "was *kansallinen innovaatiojärjestelmä* Council vocabulary before it reached the government programmes?" **cannot be answered yet**. Eela (2001) and Lemola (2001) cover this period and are used as secondary references only. |
-| **Council reviews 2006, 2010, 2014** | *Tiede, teknologia, innovaatiot* (2006); *Linjaus 2011–2015* (2010); *Uudistuva Suomi* (2014) | Titles and dates are confirmed from secondary sources, but no stable online copy has been found yet. | The 2005–2015 period, when innovation policy was being reframed, is under-represented on the Council side. |
-| **Retired web addresses** | 2003 and 2008 reviews | Cited at old minedu.fi addresses that no longer resolve. A web-archive copy, or a manual download, is needed. | The text may differ slightly from the printed edition. |
+| **Retired web addresses** | 2003, 2008, 2010 and 2014 reviews | All four were published as PDFs on the old Ministry of Education site (minedu.fi), which was retired when ministry sites moved under valtioneuvosto.fi. They were not moved to the Valto archive. The old addresses are known from citations, but a web-archive copy or a manual download is needed. | Until retrieved, the 2003–2015 period, when innovation policy was being reframed, is missing on the Council side. |
+| **2006 review not located online** | *Tiede, teknologia, innovaatiot* (2006) | Title, date and a PDF ISBN (952-485-190-3) are confirmed, but no web address has been found, not even a retired one. | Same as above; the printed copy is in the Library of Parliament. |
 | **Press releases instead of main texts** | 2017 vision and roadmap; 2020 RDI roadmap | Only the announcements were found. | A press release is a summary written for the media and is not comparable in genre or length with a full review. These rows are excluded from counting until the main documents are found. |
 
 Until these gaps are closed, all claims in this project are about **government programmes**. Nothing here is a claim about the Council reviews as a series, and no comparison between the two series is made. Rows with `url_status = gap_no_access` are skipped by the fetch script, so the gap stays visible in the manifest instead of disappearing.
@@ -183,7 +183,7 @@ The dashboard shows the 13 concepts with enough mentions to draw a readable line
 
 ## 6. Limitations
 
-- **The corpus has known gaps.** The Council reviews from 1973–2000 cannot be obtained at the moment because there is no library access, and three later reviews (2006, 2010, 2014) are not yet online in the corpus. The results therefore describe government programmes only. See *Corpus gaps* in §3.
+- **The corpus has known gaps.** The Council reviews from 1973–2000 cannot be obtained at the moment because there is no library access, and the reviews from 2003–2014 sit on a retired ministry website and still need to be retrieved from a web archive. The results therefore describe government programmes only. See *Corpus gaps* in §3.
 
 - **Lexical counting misses ideas expressed in other words.** It also misses compounds where the concept sits inside the word; for example, *kasvuyritysekosysteemi* is not counted as "ecosystem". The planned LLM claim extraction addresses this.
 - **Early programmes are very short** (often under 1,000 words), so the 1960s–80s rates rest on few mentions.
