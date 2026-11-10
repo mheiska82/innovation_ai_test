@@ -26,7 +26,7 @@ It is a personal side project. It uses public data only, with no Business Finlan
 3. **Continuity or break.** Was the start-up ecosystem a continuation of the older innovation system, or a break from it?
 4. **The Nokia question.** Through which mechanisms did Nokia's rise and decline shape Finnish start-ups?
 
-This document is the overview. Each question is reported in its own sub-project (§4): vocabulary in 1.1, and the theory of prosperity in 1.2 ([analysis v2](1.2_paradigms/analysis_q2_v2.md): 275 claims, five programmes fully coded, unvalidated).
+This document is the overview. Each question is reported in its own sub-project (§4): vocabulary in 1.1, and the theory of prosperity in 1.2 ([analysis v3](1.2_paradigms/analysis_q2_v3.md): 560 claims, ten programmes from 1987 to 2023 plus one context document fully coded, unvalidated).
 
 ## 3. Data
 
@@ -83,14 +83,14 @@ Each research question is a sub-project with its own method, files and status. A
 | | Question | Status | Main document |
 |---|---|---|---|
 | **1.1 Vocabulary** | Which concepts dominate each decade? | Tracker v0.1, 30 programmes | [1.1_vocabulary/README.md](1.1_vocabulary/README.md) · [Dashboard 1](https://claude.ai/artifact/8K3c4xNdN4Ppdoh8b2S1rr) |
-| **1.2 Paradigms** | When does the theory of prosperity change? | Analysis v2: 275 claims, 5 programmes fully coded (unvalidated) | [1.2_paradigms/analysis_q2_v2.md](1.2_paradigms/analysis_q2_v2.md) |
+| **1.2 Paradigms** | When does the theory of prosperity change? | Analysis v3: 560 claims, 10 programmes 1987–2023 + AN2008 fully coded (unvalidated) | [1.2_paradigms/analysis_q2_v3.md](1.2_paradigms/analysis_q2_v3.md) |
 | **1.3 Continuity** | Was the start-up ecosystem a continuation or a break? | Planned | [1.3_continuity/README.md](1.3_continuity/README.md) |
 
 Question 4 (the Nokia question) needs firm and start-up data rather than policy documents. It will become a separate project when it starts. Project 1.2 already records the programmes' own framings of Nokia and ICT (hypothesis H2g).
 
 ## 5. Results
 
-See the sub-projects: vocabulary results in [1.1](1.1_vocabulary/README.md), theory-of-prosperity results in [1.2](1.2_paradigms/analysis_q2_v2.md).
+See the sub-projects: vocabulary results in [1.1](1.1_vocabulary/README.md), theory-of-prosperity results in [1.2](1.2_paradigms/analysis_q2_v3.md).
 
 ## 6. Limitations
 
@@ -114,7 +114,7 @@ The repository layout for both projects is in the [README](../README.md). Projec
 project1/PROJECT1.md                 this overview
 project1/corpus/programmes.csv       shared corpus list: 32 programmes, 2 human benchmarks, 5 context documents
 project1/1.1_vocabulary/             Q1: README (method, results), data/ (tracker outputs)
-project1/1.2_paradigms/              Q2: analysis_q2_v2.md, coding/ (guide, claims v0.3, scope log, checker), data/, archive/
+project1/1.2_paradigms/              Q2: analysis_q2_v3.md, coding/ (guide, claims v0.4, scope log, checker), data/, archive/
 project1/1.3_continuity/             Q3: plan (not started)
 ```
 

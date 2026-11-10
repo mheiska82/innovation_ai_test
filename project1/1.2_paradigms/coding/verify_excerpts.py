@@ -1,7 +1,7 @@
 """Check that every excerpt in a claims CSV appears verbatim in its source text.
 
 Usage:
-    python project1/1.2_paradigms/coding/verify_excerpts.py project1/1.2_paradigms/coding/claims_v0.3.csv
+    python project1/1.2_paradigms/coding/verify_excerpts.py project1/1.2_paradigms/coding/claims_v0.4.csv
 
 Reads data/text/<document_id>.txt. Two tiers:
   1. 'yes'  -- found after normalising whitespace and line-break hyphens only

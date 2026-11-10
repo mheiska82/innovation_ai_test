@@ -1,6 +1,6 @@
 # Research question 2, analysis v2: when does Finland's theory of prosperity change?
 
-*Project 1.2. Status: 10 November 2026. Based on 275 claims in [`coding/claims_v0.3.csv`](coding/claims_v0.3.csv), coded under [`coding/CODING_GUIDE.md`](coding/CODING_GUIDE.md) v0.3, with coverage logged in [`coding/scope_v0.3.md`](coding/scope_v0.3.md). Replaces [analysis v1](archive/analysis_q2_v1.md).*
+*Project 1.2. Status: 10 November 2026. Based on 275 claims in [`coding/claims_v0.3.csv`](claims_v0.3.csv), coded under [`coding/CODING_GUIDE.md`](../coding/CODING_GUIDE.md) v0.3, with coverage logged in [`coding/scope_v0.3.md`](scope_v0.3.md). Replaces [analysis v1](analysis_q2_v1.md). Superseded by [analysis v3](../analysis_q2_v3.md).*
 
 ## 0. The question and how it is answered
 
@@ -82,7 +82,7 @@ Share of core claims carrying each tag. A claim can carry several tags. Tags wit
 | Location factors (tax, infrastructure) | 0 % | 12 % | 3 % | 10 % | 4 % | 0 % |
 | Claims of failure or doubt (count) | 0 | 1 | 1 | 3 | 7 | 6 |
 
-Raw counts are in [`data/q2_engines_v2.csv`](data/q2_engines_v2.csv).
+Raw counts are in [`data/q2_engines_v2.csv`](q2_engines_v2.csv).
 
 ## 3. Interpretation (hypotheses, revised)
 

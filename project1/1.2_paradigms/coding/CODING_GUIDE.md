@@ -1,6 +1,6 @@
 # Coding guide: theory-of-prosperity claims (research question 2)
 
-*Project 1.2. Status: 10 November 2026. Version 0.3 (full coding of five programmes; see §4c).*
+*Project 1.2. Status: 10 November 2026. Version 0.4 (full coding of ten programmes and one context document; see §4c and §4d).*
 
 > **Decision (10.11.2026):** the claims are coded by Claude only (single coder). There is no human gold standard for now. As a result, results are labelled *unvalidated*, and AI extraction can't be scored against this set: scoring it would be Claude grading Claude. A human spot-check of a sample remains the way to validate it later.
 
@@ -25,18 +25,18 @@ Each claim is coded as **cause (X) → mechanism (M) → outcome (Y)**. The mech
 
 | Field | Content |
 |---|---|
-| `claim_id`, `document_id`, `year`, `author`, `page` | As before. The author is an institution, never a named person. `page` is the PDF page index |
+| `claim_id`, `document_id`, `year`, `author`, `page` | As before. The author is an institution, never a named person. `page` is the PDF page index, or `web text` for the 1990s programmes, which are HTML |
 | `claim_type` | `causal` · `diagnosis` · `instrument` · `rationale` · `meta` |
 | `cause` (X) | The claimed driver. Required |
 | `mechanism` (M) | The mediator, **only if the text states it**; otherwise left empty |
 | `condition` | A moderator or scope condition (for example "pieni avoin talous", "jatkossakin"), only if stated |
 | `outcome` (Y) | The prosperity outcome. Required |
-| `direction` | `+` · `−` · `?` (doubt about a link, v0.3), with "(broken chain)" or "(mismatch)" where the text says a link fails |
+| `direction` | `+` · `−` · `?` (doubt about a link, v0.3), with "(broken chain)" or "(mismatch)" where the text says a link fails, and "(gap)" (v0.4) where a stated target is not yet met |
 | `link_to` | The ID or IDs of claims this one builds on (chains, as in C024 → C025, or C042 + C043 → C044) |
 | `inferred` | Which fields the coder supplied rather than the text, if any |
 | `theory_tags` | From the codebook in §3 |
 | `excerpt_verbatim`, `excerpt_verified` | The exact source words; checked by `verify_excerpts.py`: `yes` (whitespace-normalised match) or `yes (PDF spacing)` (letter-for-letter match once the PDF text layer's split words are joined) |
-| `coverage` (v0.3) | `key section (v0.2)` · `read in full` · `screened chapter`: how the claim's chapter was covered (see `scope_v0.3.md`) |
+| `coverage` (v0.3) | `key section (v0.2)` · `read in full` · `screened chapter` · `word-filter (broad sentence filter)` (v0.4, GP77 only): how the claim's chapter was covered (see `scope_v0.4.md`) |
 | `coder`, `validation` | `Claude`; `unvalidated (single coder)` |
 | `weight` (v0.2) | `core`, or `low` for vision rhetoric, agenda-setting, or outcomes outside market prosperity. Low-weight claims are left out of the engine counts |
 | `expert_review` (v0.2) | A review pass written from the stance of an innovation researcher and a policy-maker: `ACCEPT` · `EDIT` · `REJECT` · `ADDED`, with a reason |
@@ -77,6 +77,10 @@ Each claim is coded as **cause (X) → mechanism (M) → outcome (Y)**. The mech
 | `growth_employment` (v0.3) | economic growth itself as the source of jobs |
 | `health_wellbeing` (v0.3) | population health and well-being as a competitive factor |
 | `state_ownership` (v0.3) | state ownership as a growth instrument |
+| `ecosystems` (v0.4) | firms, universities and research institutes creating business and innovation together in ecosystems |
+| `welfare_model` (v0.4) | the Nordic welfare state itself as a source of competitiveness (the reverse arrow of `growth_to_welfare`) |
+| `security_resilience` (v0.4) | security of supply, resilience and strategic autonomy as industrial-policy aims |
+| `demand_user` (v0.4) | demand- and user-led innovation: customer needs, lead markets, public procurement (AN2008 only so far) |
 | `governance_coordination`, `regional`, `experimentation`, `meta_theory` | as named |
 
 The codebook is expected to change after review. Tags may be merged or split, but every change is logged here.
@@ -124,13 +128,25 @@ A second pass by Claude reviewed every claim from the stance of an innovation re
 5. **Existing v0.2 claims are kept with their IDs.** New claims are C053–C275.
 6. **Weights** follow v0.2: `low` for vision rhetoric, purely fiscal or social outcomes, minor sector claims and immigration-as-labour-supply. Low-weight claims are left out of engine counts.
 
-**Result.** 275 claims (242 core), all excerpts verified (184 `yes`, 91 `yes (PDF spacing)`). The coverage log is `scope_v0.3.md`, and the analysis is `../analysis_q2_v2.md`.
+**Result.** 275 claims (242 core), all excerpts verified (184 `yes`, 91 `yes (PDF spacing)`). The coverage log was `scope_v0.3.md` and the analysis `analysis_q2_v2.md` (both now in `../archive/`).
 
 **Review column.** For new claims, `expert_review` holds the same reviewer stance as v0.2 (`ADDED (full coding)` for 2003/2015 additions, `ACCEPT` for 2007/2011), with a note on why the claim matters. Coding and review are by the same model, so this is not independent validation.
+
+## 4d. Extension (v0.4)
+
+**Why.** v0.3 stopped at 2015, so it could date when R&D stopped being the stated engine but not whether that was a lasting break. It also jumped from 1987 to 2003, hiding the decade when the national innovation system arrived.
+
+**Added documents.** GP65 (Aho 1991), GP66 (Lipponen I 1995), GP67 (Lipponen II 1999), GP75 (Rinne 2019, also used by Marin) and GP77 (Orpo 2023), all under the §4c protocol. AN2008 (VNS 5/2008, the Government report on the national innovation strategy) is coded as a **context document**: the 2008 strategy proposal itself (ST2008) is not available as a public file, and AN2008 is the Government's own text built on it. AN2008 is read in full.
+
+**Deviation from the protocol (GP77 only).** GP77 is the longest programme (about 57,000 words). Chapter 5 (competence), chapter 7 (clean energy), section 7.6, section 8.3 and annex D were read through a **broad sentence filter** rather than in full: every sentence containing an economy, competence, research, innovation or welfare word was read in context (for example 138 of 333 sentences in chapter 7). The filter is much wider than the tier-B screen but is not a full read. The 20 claims from these sections carry `coverage = word-filter (broad sentence filter)`. Chapters 1, 4 and 6 (economy, work, growth and RDI) were read in full.
+
+**Claim types and tags.** AN2008's draft codes used the types *doubt*, *goal* and *condition*; they were mapped to the existing types (`diagnosis` with direction `−`, `instrument`, `causal` with the condition field) so the counts compare. Four tags were added (§3). `demand_user` is used only in AN2008 so far.
+
+**IDs and result.** v0.3 rows keep their IDs; new claims are C276–C560. 560 claims in total (500 core). All excerpts are verified: 463 `yes`, 97 `yes (PDF spacing)`. Coverage log: `scope_v0.4.md`. Analysis: `../analysis_q2_v3.md`.
 
 ## 5. Review procedure (for a later human spot-check)
 
 1. Read each row against its source passage, and set `reviewer_decision`.
 2. Add missed claims as new rows.
 3. Note every disagreement about type or tag in `reviewer_notes`. These feed codebook v1.
-4. The reviewed file (from `claims_v0.3.csv`) becomes `claims_gold_v1.csv`, the test set for the AI extraction. Results are reported as precision (how many AI claims are correct) and recall (how many gold claims the AI found).
+4. The reviewed file (from `claims_v0.4.csv`) becomes `claims_gold_v1.csv`, the test set for the AI extraction. Results are reported as precision (how many AI claims are correct) and recall (how many gold claims the AI found).

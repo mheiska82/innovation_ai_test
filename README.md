@@ -12,7 +12,7 @@ It is a personal side project. It uses public data only, with no Business Finlan
 | Overview | [project1/PROJECT1.md](project1/PROJECT1.md) | [project2/PROJECT2.md](project2/PROJECT2.md) |
 | Corpus list | [project1/corpus/programmes.csv](project1/corpus/programmes.csv) | [project2/corpus/council.csv](project2/corpus/council.csv) |
 | Results | [Dashboard 1](https://claude.ai/artifact/8K3c4xNdN4Ppdoh8b2S1rr) | [Dashboard 2](https://claude.ai/artifact/QuE38nxXvvPoXBvLtKEMpB) |
-| Sub-projects | [1.1 Vocabulary](project1/1.1_vocabulary/README.md) · [1.2 Paradigms (theory of prosperity, analysis v2)](project1/1.2_paradigms/analysis_q2_v2.md) · [1.3 Continuity (planned)](project1/1.3_continuity/README.md) | [project2/docs/](project2/docs/) |
+| Sub-projects | [1.1 Vocabulary](project1/1.1_vocabulary/README.md) · [1.2 Paradigms (theory of prosperity, analysis v3)](project1/1.2_paradigms/analysis_q2_v3.md) · [1.3 Continuity (planned)](project1/1.3_continuity/README.md) | [project2/docs/](project2/docs/) |
 
 The two series are different genres: coalition agreements versus expert policy guidelines. They are analysed separately, and compared only government by government.
 
@@ -24,8 +24,8 @@ project1/                      Project 1: government programmes
   PROJECT1.md                  overview, research questions, sub-projects
   corpus/programmes.csv        shared corpus list (32 programmes, 2 human benchmarks, 5 context documents)
   1.1_vocabulary/              Q1 vocabulary: README (method, results), data/ (tracker outputs)
-  1.2_paradigms/               Q2 theory of prosperity: analysis_q2_v2.md, coding/ (guide, claims v0.3,
-                               scope log, excerpt checker), data/ (engine counts), archive/ (v1)
+  1.2_paradigms/               Q2 theory of prosperity: analysis_q2_v3.md, coding/ (guide, claims v0.4,
+                               scope log, excerpt checker), data/ (engine counts), archive/ (v1, v2)
   1.3_continuity/              Q3 continuity or break: plan
 project2/                      Project 2: Council reviews
   PROJECT2.md                  description, corpus gaps, method, results
@@ -54,7 +54,7 @@ pip install -r requirements.txt
 # Project 1: government programmes
 python scripts/fetch_corpus.py project1/corpus/programmes.csv
 python scripts/vocabulary.py                    # writes project1/1.1_vocabulary/data/
-python project1/1.2_paradigms/coding/verify_excerpts.py project1/1.2_paradigms/coding/claims_v0.3.csv
+python project1/1.2_paradigms/coding/verify_excerpts.py project1/1.2_paradigms/coding/claims_v0.4.csv
 
 # Project 2: Council reviews, each document separately
 python scripts/fetch_corpus.py project2/corpus/council.csv
