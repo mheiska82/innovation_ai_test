@@ -1,6 +1,8 @@
 # Coding guide: theory-of-prosperity claims (research question 2)
 
-*Project 1. Status: 10 November 2026. Version 0 (draft for review).*
+*Project 1. Status: 10 November 2026. Version 0.1.*
+
+> **Decision (10.11.2026):** the claims are coded by Claude only (single coder). There is no human gold standard for now. As a result, results are labelled *unvalidated*, and AI extraction can't be scored against this set: scoring it would be Claude grading Claude. A human spot-check of a sample remains the way to validate it later.
 
 **Purpose.** Question 2 asks when the theory of how Finland creates prosperity changes. Word counts can't answer that, because a theory is a claim about causes. This guide defines how such claims are coded by hand. The hand-coded set is then the gold standard for testing the AI claim extraction (`prompts/claim_extraction.md`).
 
@@ -17,22 +19,30 @@ A **claim** is one statement, usually a sentence, that links something to an eco
 
 **Not coded:** pure lists of measures with no outcome; sector-only goals (for example health, culture or defence) unless they are linked to prosperity; procedural statements.
 
-## 2. Fields
+## 2. Fields (v0.1)
+
+Each claim is coded as **cause (X) → mechanism (M) → outcome (Y)**. The mechanism is a **mediator**, the channel through which X produces Y. Conditions under which X works (moderators, scope) go in their own field. These are the document's own stated causes. Nothing is inferred to be causal in reality.
 
 | Field | Content |
 |---|---|
-| `claim_id` | C001… |
-| `document_id`, `year`, `author` | From the corpus list. Author is an institution or role, never a named person |
-| `page` | The PDF page index in `data/text` (printed page numbers can differ). Empty for web-page programmes |
-| `claim_type` | `causal` · `diagnosis` · `instrument` · `rationale` · `meta` (a claim about the theory itself) |
-| `cause` → `mechanism` → `outcome` | In English, short. Anything implied but not written is marked `(implicit)` |
-| `theory_tags` | One or more from the codebook in §3, separated by `;` |
-| `excerpt_verbatim` | The exact words from the source. Part of a sentence is allowed; `…` marks a gap |
-| `excerpt_verified` | `yes` if the excerpt is found in the text by `verify_excerpts.py`, which normalises whitespace and line-break hyphens only |
-| `reviewer_decision` | `accept` · `edit` · `reject` |
-| `reviewer_correction`, `reviewer_notes` | What to change and why |
+| `claim_id`, `document_id`, `year`, `author`, `page` | As before. The author is an institution, never a named person. `page` is the PDF page index |
+| `claim_type` | `causal` · `diagnosis` · `instrument` · `rationale` · `meta` |
+| `cause` (X) | The claimed driver. Required |
+| `mechanism` (M) | The mediator, **only if the text states it**; otherwise left empty |
+| `condition` | A moderator or scope condition (for example "pieni avoin talous", "jatkossakin"), only if stated |
+| `outcome` (Y) | The prosperity outcome. Required |
+| `direction` | `+` · `−`, with "(broken chain)" or "(mismatch)" where the text says a link fails |
+| `link_to` | The ID or IDs of claims this one builds on (chains, as in C024 → C025, or C042 + C043 → C044) |
+| `inferred` | Which fields the coder supplied rather than the text, if any |
+| `theory_tags` | From the codebook in §3 |
+| `excerpt_verbatim`, `excerpt_verified` | The exact source words; checked by `verify_excerpts.py` |
+| `coder`, `validation` | `Claude`; `unvalidated (single coder)` |
 
-**Missed claims:** the reviewer adds new rows with `coder` = `reviewer` and `reviewer_decision` = `added`. These measure what the extraction misses (recall).
+**Changes from v0:**
+- Mechanisms I had inferred are removed. 10 of the 47 claims now have a stated mechanism.
+- Conditions moved to their own column (8 claims).
+- `direction`, `link_to` and `inferred` were added. 6 claims have an inferred field, always an implicit cause or outcome.
+- C020's excerpt was extended to the full sentence.
 
 ## 3. Theory tags (codebook v0)
 
@@ -71,7 +81,7 @@ The codebook is expected to change after review. Tags may be merged or split, bu
 - **Pre-coded by Claude, not yet reviewed.** It is a draft gold standard only, until the reviewer has gone through every row.
 - **Every excerpt was checked by script**: 47 out of 47 were found verbatim.
 
-## 5. Review procedure
+## 5. Review procedure (for a later human spot-check)
 
 1. Read each row against its source passage, and set `reviewer_decision`.
 2. Add missed claims as new rows.
