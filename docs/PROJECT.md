@@ -32,12 +32,12 @@ This document reports on question 1, the first stage.
 
 ### Corpus, batch 1
 
-The corpus list is in `corpus/batch1.csv` (53 entries). So far 34 documents have been downloaded.
+The corpus list is in `corpus/batch1.csv` (54 entries). So far 34 documents have been downloaded.
 
 | Series | Documents | Status |
 |---|---|---|
 | Government programmes (*hallitusohjelmat*), governments 46–77, 1961–2023 | 32 entries, 30 counted | All downloaded |
-| Research and Innovation Council reviews and decisions, 1973–2024 | 14 | 2003 onwards: 8 rows, 2 with main documents online (2024 plan; 2003 and 2008 via retired minedu.fi links), 2017 and 2020 press releases only, 2006/2010/2014 still to locate. **1973–2000: 6 rows, not obtainable (see Corpus gaps)** |
+| Research and Innovation Council reviews and decisions, 1973–2026 | 15 | 2003 onwards: 8 rows, 2 with main documents online (2024 plan; 2003 and 2008 via retired minedu.fi links), 2017 and 2020 press releases only, 2006/2010/2014 still to locate. **1973–2000: 6 rows, not obtainable (see Corpus gaps)** |
 | Anchor documents (2008 innovation policy report, 2014 evaluation of the Council, 2022 R&D funding act, 2023 first multi-annual R&D plan) | 4 | All 4 have online links |
 | Human benchmark studies (Eela 2001; Lemola 2001; Lemola 2020) | 3 | Reference only, not counted |
 
