@@ -1,6 +1,6 @@
 # Continuity or break? The start-up ecosystem in Finnish government programmes, 1987–2023
 
-*Project 1.3, analysis v1. Status: 25 November 2026. Built on the ten coded programmes and the 2008 Government innovation report (AN2008) from [Project 1.2](../1.2_paradigms/analysis_q2_v3.md). Unvalidated: one coder (Claude). The outside evaluations (EV2009F, OE2017, OE2022) are not yet in the corpus.*
+*Project 1.3, analysis v1.1. Status: 25 November 2026. Built on the ten coded programmes and the 2008 Government innovation report (AN2008) from [Project 1.2](../1.2_paradigms/analysis_q2_v3.md), plus three outside evaluations added in v1.1: EV2009F, OE2017 and OE2022. Unvalidated: one coder (Claude).*
 
 ## Question
 
@@ -31,6 +31,14 @@ Three tests, all on public documents and all traceable to verbatim excerpts.
      - markets.
    - The test asks whether growth-firm and risk-capital claims still name knowledge or R&D (continuity of the route) or stand without it (a new route).
    - The 2009 evaluation (EV2009P) is left out because it is in English.
+4. **Outside evaluations** (added in v1.1).
+   - The documents are:
+     - the 2009 international evaluation, full report (EV2009F) and policy report (EV2009P);
+     - the OECD Reviews of Innovation Policy: Finland 2017 (OE2017);
+     - chapter 2 of the OECD Economic Survey of Finland 2022, "Rebooting the innovation ecosystems" (OE2022, PDF pages 71–120).
+   - English stems are counted per 10,000 words with [`scripts/outside_terms.py`](scripts/outside_terms.py) → [`data/outside_terms.csv`](data/outside_terms.csv).
+   - 20 claims are coded from targeted passages on the innovation system, ecosystems, start-ups, growth firms, venture capital, SHOKs and Nokia ([`data/claims_context_q3_v0.1.csv`](data/claims_context_q3_v0.1.csv), C561–C580). All 20 excerpts pass the checker (17 exact, 3 after PDF spacing).
+   - These are targeted claims, not full coding, so they are not added to the shares in claims v0.4.
 
 ## Evidence: the numbers
 
@@ -79,6 +87,17 @@ Three tests, all on public documents and all traceable to verbatim excerpts.
 | 2003–2011 (incl. AN2008) | 185 | 73 (39 %) | 13 | 3 |
 | 2015–2023 | 201 | 62 (31 %) | 7 | 4 |
 
+### Outside evaluations (mentions per 10,000 words)
+
+| Document | Innovation system | Ecosystem | Growth firm | Start-up | Venture capital |
+|---|---|---|---|---|---|
+| EV2009P (2009) | 24.26 | 0 | 17.16 | 0.69 | 2.77 |
+| EV2009F (2009) | 13.83 | 0 | 20.95 | 1.93 | 4.61 |
+| OE2017 | 11.35 | 2.59 | 0.65 | 8.97 | 4.32 |
+| OE2022, chapter 2 | 1.73 | 20.82 | 0 | 2.17 | 0.43 |
+
+"Growth firm" includes the 2009 evaluation's abbreviation HGEF (high-growth entrepreneurial firm). The rates are not comparable with the Finnish counts above, because the languages and stems differ; read them within this table only.
+
 ## Extracted relations
 
 1. **The start-up instruments have roots in the 1990s.**
@@ -98,12 +117,21 @@ Three tests, all on public documents and all traceable to verbatim excerpts.
    - In 2015–2023, four of those seven also name R&D or knowledge: R&D money is redirected to growth firms rather than replaced.
    - The 2023 programme states the start-up ecosystem as a goal: "Luodaan edellytyksiä maailman parhaan startup- ja kasvuyritysekosysteemin kehittymiselle." (GP77, p. 100).
 
+5. **The outside evaluations carried growth entrepreneurship first, and ecosystems only later.** *(v1.1)*
+   - The 2009 international evaluation never uses "ecosystem". It frames the problem inside the innovation system: "The Finnish innovation system suffers from a mismatch between 1) the growing demand by Finnish HGEFs for global insight, foreign expertise, international networks, and 2) an insufficient supply of inward foreign spillovers…" (C561, EV2009F p. 149). It names growth entrepreneurship as an orphan: "The two main challenges – relatively weak internationalization and somewhat lacking growth entrepreneurship – remain orphans in the Finnish system." (C564, p. 302).
+   - The 2011 programme then turns to growth firms (relation 4 above). That is a match in timing, not a proof of influence.
+   - The OECD 2017 review uses both vocabularies. It speaks of an "entrepreneurship ecosystem" (C572) and records the redirection seen in the programmes: "Tekes has been instructed by successive governments to focus increasingly on start-ups and entrepreneurship" (C569, p. 37). It also notes the discontinuation of SHOK funding (C570).
+   - By 2022 the OECD frames Finland's task as rebooting its innovation ecosystems after Nokia (C575). It uses "innovation system" and "ecosystem" side by side (C576), and links the weakening to "the rapid withdrawal of public funding for applied research and innovation collaboration" (C578, p. 86).
+
 ## Interpretation (hypotheses, not findings)
 
 - **H3a: continuity by conversion.** The start-up ecosystem grew mainly by converting existing instruments (R&D funding redirected, public funds merged) and layering new ones on top, not by replacing the innovation system. In the programmes, the only instrument ended outright is the SHOKs.
 - **H3b: a break in words, not in institutions.** The clearest break is conceptual: "ecosystem instead of the innovation system" in 2008. In the programmes it shows as a gap, with no "innovation system" after 2007 and no "ecosystem" until 2019, rather than as abolished organisations.
 - **H3c: 2011 is the hinge.** The 2011 programme redirects funding to growth firms, strengthens public venture capital, names accelerators and plans a capital-market strategy. 2015 continues that turn while cutting.
-- **H3d: an outside view may have carried the new frame.** The 2008 report and the 2009 international evaluation sit between the two vocabularies. Testing this needs EV2009F and the OECD reviews, which are pending.
+- **H3d (revised in v1.1): two frames, two routes.**
+  - *Growth entrepreneurship* came with the outside view. The 2009 evaluation makes high-growth firms its central problem, and the 2011 programme follows.
+  - *Ecosystem* came from inside. The Government's own 2008 report uses it first. The 2009 evaluation does not use it at all. The OECD adopts it as its main frame only in 2022, after the 2019 programme.
+  - On this evidence, the ecosystem word was not imported from the international reviews. The documents show timing only. Who carried the idea, for example through Sitra, Tekes or the Council, would need other sources.
 
 ## Limits
 
@@ -112,11 +140,12 @@ Three tests, all on public documents and all traceable to verbatim excerpts.
 - **One coder.** Actions and links were coded by Claude. Of the eight links between items, four are stated in the text (the same instrument named, or "sijasta"), two carry a stated continuation word but an inferred predecessor, and two are inferred; all are flagged.
 - **Small counts.** The growth-route test rests on 25 growth-firm or risk-capital claims in all. The stem rules are in the scripts, and every match is listed in `data/claim_families.csv`.
 - **Not an evaluation.** Nothing here judges whether any instrument or agency worked.
-- **Missing documents.** The 2008 strategy proposal (ST2008) is not online. EV2009F, OE2017 and OE2022 are waiting to be added.
+- **Missing documents.** The 2008 strategy proposal (ST2008) is not online. The outside evaluations are coded from targeted passages only, and their text layer has some lower-cased words, which the excerpts keep as extracted.
+- **Outside evaluations are other people's assessments.** Claims C561–C580 record what the evaluators wrote. They are evidence of the outside view, not findings of this project.
 
 ## Next steps
 
-1. Add EV2009F, OE2017 and OE2022 (the PDFs need to be attached by hand), and code their claims in English, to test H3d.
+1. Code EV2009F, OE2017 and OE2022 in full (v1.1 codes targeted passages), and add the Council reviews of 2010 and 2014 to trace who used "ecosystem" between 2008 and 2019.
 2. Extend the instrument coding to all programme chapters, not only the coded claims.
 3. Do a human spot-check of the 26 instrument items.
 4. Add a fifth act, "the start-up turn", to the narrative dashboard.
