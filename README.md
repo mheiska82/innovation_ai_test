@@ -4,6 +4,8 @@ An AI research tool for Finnish innovation-policy history (1960s–today), built
 
 It is a personal side project. It uses public data only, with no Business Finland internal data or code, and it does not profile named individuals.
 
+**Start here:** [the full narrative dashboard](https://claude.ai/artifact/Mwxp27CDnwW6WLswLBUBch) (35 years of words and money, on one page) and [the write-up for different audiences](https://claude.ai/artifact/YAkJ731Pg9eWpAxmSECEBG). Both are private until shared.
+
 ## Two projects
 
 | | Project 1: Government programmes | Project 2: Research and Innovation Council reviews |
