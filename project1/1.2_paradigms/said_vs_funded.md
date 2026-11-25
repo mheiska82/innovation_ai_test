@@ -1,6 +1,6 @@
 # Said vs funded: R&D in Finnish government programmes and state budgets, 1987–2026
 
-*Project 1.2, extension of [analysis v3](analysis_q2_v3.md). Status: 25 November 2026. Story page: [Words first, money later](https://claude.ai/artifact/5G6CEHCLJZcgXAUEWS1RCS) (private until shared). Unvalidated: the claims have one coder (Claude).*
+*Project 1.2, extension of [analysis v3](analysis_q2_v3.md). Status: 25 November 2026. Story page: [Words first, money later](https://claude.ai/artifact/5G6CEHCLJZcgXAUEWS1RCS); dashboard: [Dashboard 4](https://claude.ai/artifact/9kvnpVHKr248vjyVSJgyCe) (both private until shared). Unvalidated: the claims have one coder (Claude).*
 
 ## Question
 
