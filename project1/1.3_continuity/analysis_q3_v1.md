@@ -165,10 +165,13 @@ RC2017 is very short (935 words), so its rate is indicative only; the count is 1
 - **Missing documents.** The 2008 strategy proposal (ST2008) is not online. The outside evaluations are coded from targeted passages only, and their text layer has some lower-cased words, which the excerpts keep as extracted.
 - **Outside evaluations are other people's assessments.** Claims C561–C580 record what the evaluators wrote, and C581–C586 what the Council wrote. They are evidence of the outside view, not findings of this project.
 
+## Where it is shown
+
+The [narrative dashboard](https://claude.ai/artifact/Mwxp27CDnwW6WLswLBUBch) carries this analysis as Act 5 ("the start-up turn") and a section "Who said 'ecosystem' first?" with the instrument list. Narrative dashboard and write-up are private until shared.
+
 ## Next steps
 
 1. Code EV2009F, OE2017 and OE2022 in full (v1.1 codes targeted passages).
 2. Find the Council's 2010 review, *Tutkimus- ja innovaatiopoliittinen linjaus 2011–2015*, and the 2008 interim review. Library or archive copies would do; they would show whether the Council used "ecosystem" before 2014.
 3. Extend the instrument coding to all programme chapters, not only the coded claims.
 4. Do a human spot-check of the 26 instrument items.
-5. Add a fifth act, "the start-up turn", to the narrative dashboard.
