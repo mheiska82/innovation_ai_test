@@ -1,4 +1,4 @@
-"""Start-up-era terms in the ten coded programmes and AN2008 (Project 1.3).
+"""Start-up-era terms in the ten coded programmes, AN2008 and four Council documents (Project 1.3).
 
 Counts Finnish stems per document in data/text/<ID>.txt (whole text), as raw
 mentions and per 10,000 words, and keeps up to three example passages per
@@ -10,7 +10,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 DOCS = [('GP64', 1987), ('GP65', 1991), ('GP66', 1995), ('GP67', 1999), ('GP68', 2003), ('GP70', 2007),
-        ('AN2008', 2008), ('GP72', 2011), ('GP74', 2015), ('GP75', 2019), ('GP77', 2023)]
+        ('AN2008', 2008), ('GP72', 2011), ('GP74', 2015), ('GP75', 2019), ('GP77', 2023),
+        # Research and Innovation Council documents counted in Project 2 (RC2010 is a corpus gap)
+        ('RC2014', 2014), ('RC2017', 2017), ('RC2024', 2024), ('RC2026', 2026)]
 TERMS = {
     'innovation_system': r'innovaatiojärjestelm',
     'ecosystem': r'ekosysteem',  # ecological senses removed by EXCLUDE below

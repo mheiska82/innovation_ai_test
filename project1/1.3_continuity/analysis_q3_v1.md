@@ -1,6 +1,6 @@
 # Continuity or break? The start-up ecosystem in Finnish government programmes, 1987–2023
 
-*Project 1.3, analysis v1.1. Status: 25 November 2026. Built on the ten coded programmes and the 2008 Government innovation report (AN2008) from [Project 1.2](../1.2_paradigms/analysis_q2_v3.md), plus three outside evaluations added in v1.1: EV2009F, OE2017 and OE2022. Unvalidated: one coder (Claude).*
+*Project 1.3, analysis v1.2. Status: 25 November 2026. Built on the ten coded programmes and the 2008 Government innovation report (AN2008) from [Project 1.2](../1.2_paradigms/analysis_q2_v3.md), plus three outside evaluations added in v1.1 (EV2009F, OE2017, OE2022) and four Research and Innovation Council documents added in v1.2 (RC2014, RC2017, RC2024, RC2026). Unvalidated: one coder (Claude).*
 
 ## Question
 
@@ -37,8 +37,12 @@ Three tests, all on public documents and all traceable to verbatim excerpts.
      - the OECD Reviews of Innovation Policy: Finland 2017 (OE2017);
      - chapter 2 of the OECD Economic Survey of Finland 2022, "Rebooting the innovation ecosystems" (OE2022, PDF pages 71–120).
    - English stems are counted per 10,000 words with [`scripts/outside_terms.py`](scripts/outside_terms.py) → [`data/outside_terms.csv`](data/outside_terms.csv).
-   - 20 claims are coded from targeted passages on the innovation system, ecosystems, start-ups, growth firms, venture capital, SHOKs and Nokia ([`data/claims_context_q3_v0.1.csv`](data/claims_context_q3_v0.1.csv), C561–C580). All 20 excerpts pass the checker (17 exact, 3 after PDF spacing).
+   - 20 claims are coded from targeted passages on the innovation system, ecosystems, start-ups, growth firms, venture capital, SHOKs and Nokia ([`data/claims_context_q3_v0.2.csv`](data/claims_context_q3_v0.2.csv), C561–C580). All 20 excerpts pass the checker (17 exact, 3 after PDF spacing).
    - These are targeted claims, not full coding, so they are not added to the shares in claims v0.4.
+5. **Council documents** (added in v1.2).
+   - The four Council documents already counted in Project 2 go through the same Finnish stem count (`startup_terms.py`).
+   - Six claims on the innovation system and ecosystems are coded from them (C581–C586, same file). All six pass the checker.
+   - The Council's 2010 policy review (RC2010) and its 2008 interim review are corpus gaps. Their old minedu.fi addresses are retired, and no copy was found online.
 
 ## Evidence: the numbers
 
@@ -76,6 +80,17 @@ Three tests, all on public documents and all traceable to verbatim excerpts.
 | 2015 | 0 | 0 | 0.53 | 0 | 1 |
 | 2019 | 0 | 3.87 | 0.97 | 0.48 (2 mentions) | 2 |
 | 2023 | 0.17 | 1.21 | 0.69 | 0.17 (1 mention) | 3 |
+
+**Council documents** (same stems, added in v1.2):
+
+| Document | Innovation system | Ecosystem | Growth firm | Start-up | Venture capital (count) |
+|---|---|---|---|---|---|
+| RC2014 (Council policy review 2015–2020) | 14.96 | 4.67 | 3.74 | 1.87 | 4 |
+| RC2017 (Council vision and roadmap 2030, a 10-page slide deck) | 10.70 | 117.65 (11 mentions) | 0 | 0 | 0 |
+| RC2024 (multi-annual R&D funding plan) | 1.67 | 7.53 | 1.67 | 5.02 | 1 |
+| RC2026 (national strategic RDI choices) | 1.33 | 13.30 | 1.33 | 0.66 | 1 |
+
+RC2017 is very short (935 words), so its rate is indicative only; the count is 11 mentions.
 
 1987, 1991 and 2003 have no mentions of the first four terms. Full counts and example passages are in `data/startup_terms.csv` and `data/startup_terms_examples.csv`.
 
@@ -123,6 +138,12 @@ Three tests, all on public documents and all traceable to verbatim excerpts.
    - The OECD 2017 review uses both vocabularies. It speaks of an "entrepreneurship ecosystem" (C572) and records the redirection seen in the programmes: "Tekes has been instructed by successive governments to focus increasingly on start-ups and entrepreneurship" (C569, p. 37). It also notes the discontinuation of SHOK funding (C570).
    - By 2022 the OECD frames Finland's task as rebooting its innovation ecosystems after Nokia (C575). It uses "innovation system" and "ecosystem" side by side (C576), and links the weakening to "the rapid withdrawal of public funding for applied research and innovation collaboration" (C578, p. 86).
 
+6. **The Council bridges the eleven-year gap.** *(v1.2)*
+   - In 2014 the Council still writes mainly of the innovation system: "Innovaatiojärjestelmää kehitetään kokonaisuutena ja kansainvälistetään läpikäyvästi." (C584, RC2014 p. 14). It brings in ecosystems alongside: "Globaalien osaamiskärkien tavoittelu vaatii laaja-alaista, monen toimijan vuorovaikutteista verkostoa, ekosysteemiä." (C581, p. 21).
+   - The 2017 vision makes growth ecosystems one of its four main headings. It sets the target "Suomessa on useita yritysvetoisia miljardiluokan kasvuekosysteemejä, jotka tuottavat kilpailukykyisiä ratkaisuja globaaleihin tarpeisiin" (C586, RC2017 p. 7).
+   - The 2019 programme uses the same phrase: "Suomeen syntyy uusia miljardiluokan ekosysteemejä" (C431, GP75 p. 99). This is the closest textual echo in the corpus between a Council document and a programme.
+   - After 2019 the Council's documents use "ecosystem" far more than "innovation system" (RC2024, RC2026).
+
 ## Interpretation (hypotheses, not findings)
 
 - **H3a: continuity by conversion.** The start-up ecosystem grew mainly by converting existing instruments (R&D funding redirected, public funds merged) and layering new ones on top, not by replacing the innovation system. In the programmes, the only instrument ended outright is the SHOKs.
@@ -131,7 +152,8 @@ Three tests, all on public documents and all traceable to verbatim excerpts.
 - **H3d (revised in v1.1): two frames, two routes.**
   - *Growth entrepreneurship* came with the outside view. The 2009 evaluation makes high-growth firms its central problem, and the 2011 programme follows.
   - *Ecosystem* came from inside. The Government's own 2008 report uses it first. The 2009 evaluation does not use it at all. The OECD adopts it as its main frame only in 2022, after the 2019 programme.
-  - On this evidence, the ecosystem word was not imported from the international reviews. The documents show timing only. Who carried the idea, for example through Sitra, Tekes or the Council, would need other sources.
+  - On this evidence, the ecosystem word was not imported from the international reviews.
+  - *(v1.2)* The Council is the most likely bridge in the corpus: ecosystems appear beside the innovation system in 2014, become a main heading in 2017, and the 2019 programme echoes the Council's "billion-euro ecosystems". This is textual evidence of borrowing, not of who drafted what. The missing 2010 review could move the Council's first use earlier.
 
 ## Limits
 
@@ -141,11 +163,12 @@ Three tests, all on public documents and all traceable to verbatim excerpts.
 - **Small counts.** The growth-route test rests on 25 growth-firm or risk-capital claims in all. The stem rules are in the scripts, and every match is listed in `data/claim_families.csv`.
 - **Not an evaluation.** Nothing here judges whether any instrument or agency worked.
 - **Missing documents.** The 2008 strategy proposal (ST2008) is not online. The outside evaluations are coded from targeted passages only, and their text layer has some lower-cased words, which the excerpts keep as extracted.
-- **Outside evaluations are other people's assessments.** Claims C561–C580 record what the evaluators wrote. They are evidence of the outside view, not findings of this project.
+- **Outside evaluations are other people's assessments.** Claims C561–C580 record what the evaluators wrote, and C581–C586 what the Council wrote. They are evidence of the outside view, not findings of this project.
 
 ## Next steps
 
-1. Code EV2009F, OE2017 and OE2022 in full (v1.1 codes targeted passages), and add the Council reviews of 2010 and 2014 to trace who used "ecosystem" between 2008 and 2019.
-2. Extend the instrument coding to all programme chapters, not only the coded claims.
-3. Do a human spot-check of the 26 instrument items.
-4. Add a fifth act, "the start-up turn", to the narrative dashboard.
+1. Code EV2009F, OE2017 and OE2022 in full (v1.1 codes targeted passages).
+2. Find the Council's 2010 review, *Tutkimus- ja innovaatiopoliittinen linjaus 2011–2015*, and the 2008 interim review. Library or archive copies would do; they would show whether the Council used "ecosystem" before 2014.
+3. Extend the instrument coding to all programme chapters, not only the coded claims.
+4. Do a human spot-check of the 26 instrument items.
+5. Add a fifth act, "the start-up turn", to the narrative dashboard.

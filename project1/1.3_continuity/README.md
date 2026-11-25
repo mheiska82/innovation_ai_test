@@ -1,6 +1,6 @@
 # Project 1.3: Continuity or break (research question 3)
 
-*Part of [Project 1](../PROJECT1.md). Status: analysis v1.1, 25 November 2026 (unvalidated): [analysis_q3_v1.md](analysis_q3_v1.md). Data: [data/](data/); scripts: [scripts/](scripts/). v1.1 adds the outside evaluations EV2009F, OE2017 and OE2022.*
+*Part of [Project 1](../PROJECT1.md). Status: analysis v1.2, 25 November 2026 (unvalidated): [analysis_q3_v1.md](analysis_q3_v1.md). Data: [data/](data/); scripts: [scripts/](scripts/). v1.1 adds the outside evaluations EV2009F, OE2017 and OE2022; v1.2 adds four Council documents (RC2014–RC2026).*
 
 **Question.** Was the start-up ecosystem a continuation of the older innovation system, or a break from it?
 
