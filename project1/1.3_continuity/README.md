@@ -1,6 +1,6 @@
 # Project 1.3: Continuity or break (research question 3)
 
-*Part of [Project 1](../PROJECT1.md). Status: planned, not started.*
+*Part of [Project 1](../PROJECT1.md). Status: analysis v1, 25 November 2026 (unvalidated): [analysis_q3_v1.md](analysis_q3_v1.md). Data: [data/](data/); scripts: [scripts/](scripts/). The outside evaluations (EV2009F, OE2017, OE2022) are waiting to be added.*
 
 **Question.** Was the start-up ecosystem a continuation of the older innovation system, or a break from it?
 

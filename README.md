@@ -14,7 +14,7 @@ It is a personal side project. It uses public data only, with no Business Finlan
 | Overview | [project1/PROJECT1.md](project1/PROJECT1.md) | [project2/PROJECT2.md](project2/PROJECT2.md) |
 | Corpus list | [project1/corpus/programmes.csv](project1/corpus/programmes.csv) | [project2/corpus/council.csv](project2/corpus/council.csv) |
 | Results | [Dashboard 1](https://claude.ai/artifact/8K3c4xNdN4Ppdoh8b2S1rr) (vocabulary) · [Dashboard 3](https://claude.ai/artifact/U9PoQKHgZxME1N3U4j6wpZ) (theory of prosperity) · [Dashboard 4](https://claude.ai/artifact/9kvnpVHKr248vjyVSJgyCe) (R&D said vs funded) | [Dashboard 2](https://claude.ai/artifact/QuE38nxXvvPoXBvLtKEMpB) |
-| Sub-projects | [1.1 Vocabulary](project1/1.1_vocabulary/README.md) · [1.2 Paradigms (theory of prosperity, analysis v3)](project1/1.2_paradigms/analysis_q2_v3.md) · [Dashboard 3](https://claude.ai/artifact/U9PoQKHgZxME1N3U4j6wpZ) · [Said vs funded](project1/1.2_paradigms/said_vs_funded.md) ([Dashboard 4](https://claude.ai/artifact/9kvnpVHKr248vjyVSJgyCe), [story](https://claude.ai/artifact/5G6CEHCLJZcgXAUEWS1RCS)) · [1.3 Continuity (planned)](project1/1.3_continuity/README.md) | [project2/docs/](project2/docs/) |
+| Sub-projects | [1.1 Vocabulary](project1/1.1_vocabulary/README.md) · [1.2 Paradigms (theory of prosperity, analysis v3)](project1/1.2_paradigms/analysis_q2_v3.md) · [Dashboard 3](https://claude.ai/artifact/U9PoQKHgZxME1N3U4j6wpZ) · [Said vs funded](project1/1.2_paradigms/said_vs_funded.md) ([Dashboard 4](https://claude.ai/artifact/9kvnpVHKr248vjyVSJgyCe), [story](https://claude.ai/artifact/5G6CEHCLJZcgXAUEWS1RCS)) · [1.3 Continuity (analysis v1)](project1/1.3_continuity/analysis_q3_v1.md) | [project2/docs/](project2/docs/) |
 
 The two series are different genres: coalition agreements versus expert policy guidelines. They are analysed separately, and compared only government by government.
 
@@ -28,7 +28,8 @@ project1/                      Project 1: government programmes
   1.1_vocabulary/              Q1 vocabulary: README (method, results), data/ (tracker outputs)
   1.2_paradigms/               Q2 theory of prosperity: analysis_q2_v3.md, coding/ (guide, claims v0.4,
                                scope log, excerpt checker), data/ (engine counts), archive/ (v1, v2)
-  1.3_continuity/              Q3 continuity or break: plan
+  1.3_continuity/              Q3 continuity or break: analysis_q3_v1.md, data/ (instruments, start-up terms,
+                               growth routes), scripts/
 project2/                      Project 2: Council reviews
   PROJECT2.md                  description, corpus gaps, method, results
   corpus/council.csv           corpus list (15 Council documents, 4 anchors, 1 benchmark)

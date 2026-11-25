@@ -1,0 +1,122 @@
+# Continuity or break? The start-up ecosystem in Finnish government programmes, 1987–2023
+
+*Project 1.3, analysis v1. Status: 25 November 2026. Built on the ten coded programmes and the 2008 Government innovation report (AN2008) from [Project 1.2](../1.2_paradigms/analysis_q2_v3.md). Unvalidated: one coder (Claude). The outside evaluations (EV2009F, OE2017, OE2022) are not yet in the corpus.*
+
+## Question
+
+Was the start-up ecosystem a continuation of the older innovation system, or a break from it? The question is asked of the programmes only: what each government said it would create, keep, redirect or end. It does not evaluate any instrument or agency.
+
+## Data and method
+
+Three tests, all on public documents and all traceable to verbatim excerpts.
+
+1. **Instrument coding** ([`data/instruments_v0.1.csv`](data/instruments_v0.1.csv)).
+   - There are 26 items, each naming an instrument, programme or organisation behind innovation and growth firms: 24 claims from claims v0.4, plus 2 passages from the programme texts that are not coded claims.
+   - Each item has an action:
+     - *create*, *use* or *strengthen*;
+     - *continue*, *redirect* or *merge*;
+     - *reform*, *reframe* or *end*.
+   - Each item may link to an earlier item (`link_to`). The `link_basis` column says whether the link is stated in the text (the same instrument named, or a word such as "jatketaan" or "sijasta") or inferred by the coder.
+   - All 26 excerpts pass the excerpt checker (18 exact, 8 after PDF spacing).
+2. **Vocabulary of the start-up era** ([`scripts/startup_terms.py`](scripts/startup_terms.py) → [`data/startup_terms.csv`](data/startup_terms.csv), with example passages).
+   - It counts Finnish stems in the full texts of the eleven documents, per 10,000 words. The terms are innovation system, ecosystem, growth firm, start-up, venture capital, incubator or accelerator, and commercialisation.
+   - Ecological senses of "ekosysteemi" are removed by a context rule. Every match left in the 2019 and 2023 programmes was read.
+3. **Growth routes in claims** ([`scripts/families.py`](scripts/families.py) → [`data/claim_families.csv`](data/claim_families.csv), [`data/family_shares.csv`](data/family_shares.csv)).
+   - It marks which routes to growth each core claim's Finnish excerpt names, using stems:
+     - knowledge and R&D;
+     - networks and ecosystems;
+     - risk capital;
+     - growth firms and start-ups;
+     - entrepreneurship in general;
+     - markets.
+   - The test asks whether growth-firm and risk-capital claims still name knowledge or R&D (continuity of the route) or stand without it (a new route).
+   - The 2009 evaluation (EV2009P) is left out because it is in English.
+
+## Evidence: the numbers
+
+### Instruments by action (26 items)
+
+| Action | Items | Years |
+|---|---|---|
+| Create | 11 | 1999 (2), 2003, 2007 (2), 2008, 2011, 2015, 2019 (2), 2023 |
+| Strengthen or use | 6 | 1995, 2003, 2007, 2011 (2), 2023 |
+| Continue | 2 | 2015, 2019 |
+| Redirect | 2 | 2011, 2015 |
+| Merge | 2 | 2007, 2023 |
+| Reform or reframe | 2 | 1995, 2008 |
+| End | 1 | 2015 |
+
+### Stated lines of descent
+
+| From | To | How the text links them |
+|---|---|---|
+| 1995: the national innovation system, developed as a whole (C323) | 2008: ecosystems *instead of* national innovation systems (C382) | "Kansallisten innovaatiojärjestelmien sijasta huomio kiinnittyy innovaatioiden ekosysteemeihin" |
+| 2003: Centre of Expertise programme (C093) | 2007: cluster-based OSKE strengthened (C155) | Same programme named |
+| 2007: SHOKs created (C135) | 2015: SHOKs phased out (C275) | "Tekesin Shokit ajetaan vaiheittain alas." |
+| 2011: funding shifted to growth-seeking firms (C203) | 2015: the targeting continued (C266) and Tekes grants turned to growth firms (C274) | "Jatketaan … kohdentamista" and "yhä enemmän"; the predecessor is inferred |
+| 2019: agreements with university cities (C441) | 2023: the 18 innovation-ecosystem agreements strengthened (C490) | "tehtyjen innovaatioekosysteemisopimusten, joita nyt on kahdeksantoista" |
+
+### Start-up-era words in the programmes (mentions per 10,000 words)
+
+| Document | Innovation system | Ecosystem | Growth firm | Start-up | Venture capital (count) |
+|---|---|---|---|---|---|
+| 1995 | 2.57 | 0 | 0 | 0 | 1 |
+| 1999 | 4.41 | 0 | 0 | 0 | 0 |
+| 2007 | 0.61 | 0 | 1.21 | 0 | 5 |
+| **AN2008** | **31.07** | **8.18** | **13.08** | 0 | 4 |
+| 2011 | 0 | 0 | 2.80 | 0 | 4 |
+| 2015 | 0 | 0 | 0.53 | 0 | 1 |
+| 2019 | 0 | 3.87 | 0.97 | 0.48 (2 mentions) | 2 |
+| 2023 | 0.17 | 1.21 | 0.69 | 0.17 (1 mention) | 3 |
+
+1987, 1991 and 2003 have no mentions of the first four terms. Full counts and example passages are in `data/startup_terms.csv` and `data/startup_terms_examples.csv`.
+
+### Growth routes in core claims
+
+| Era | Core claims | Name knowledge or R&D | Name growth firms or risk capital | …of which also name knowledge or R&D |
+|---|---|---|---|---|
+| 1987–1999 | 103 | 35 (34 %) | 5 | 0 |
+| 2003–2011 (incl. AN2008) | 185 | 73 (39 %) | 13 | 3 |
+| 2015–2023 | 201 | 62 (31 %) | 7 | 4 |
+
+## Extracted relations
+
+1. **The start-up instruments have roots in the 1990s.**
+   - The 1995 programme already promises risk finance and networking for innovative SMEs: "parantamalla erityisesti niiden vakuus- ja riskirahoitusmahdollisuuksia" (C320).
+   - The 1999 programme launches an entrepreneurship project for "uusien yritysten perustamista" (C351).
+   - Growth-firm risk capital follows in 2007, with pension companies (C136), and Sitra's start-up functions move to Finnvera (GP70, p. 50).
+2. **The words broke first, in a report, not a programme.**
+   - The 2008 Government report names ecosystems *instead of* the national innovation system (C382). In that one document "innovation system" appears 19 times and "ecosystem" 5 times.
+   - The programmes then drop "innovation system" (none in 2011, 2015 or 2019).
+   - They take up "ecosystem" only in 2019, eleven years later.
+3. **Most change is redirection and merging, not ending.**
+   - Of 26 items, one is an ending: the SHOKs, created in 2007 and phased out in 2015.
+   - The R&D funding instrument itself is kept and turned towards growth firms, in 2011 (C203) and 2015 (C266, C274).
+   - Public venture capital is merged twice: Sitra into Finnvera in 2007, and three state funds into Suomen Teollisuussijoitus in 2023 (C484).
+4. **Growth-firm talk peaks around 2008–2011 and is joined to R&D afterwards.**
+   - Claims naming growth firms or risk capital rise from 5 (1987–1999) to 13 (2003–2011), then fall to 7 (2015–2023).
+   - In 2015–2023, four of those seven also name R&D or knowledge: R&D money is redirected to growth firms rather than replaced.
+   - The 2023 programme states the start-up ecosystem as a goal: "Luodaan edellytyksiä maailman parhaan startup- ja kasvuyritysekosysteemin kehittymiselle." (GP77, p. 100).
+
+## Interpretation (hypotheses, not findings)
+
+- **H3a: continuity by conversion.** The start-up ecosystem grew mainly by converting existing instruments (R&D funding redirected, public funds merged) and layering new ones on top, not by replacing the innovation system. In the programmes, the only instrument ended outright is the SHOKs.
+- **H3b: a break in words, not in institutions.** The clearest break is conceptual: "ecosystem instead of the innovation system" in 2008. In the programmes it shows as a gap, with no "innovation system" after 2007 and no "ecosystem" until 2019, rather than as abolished organisations.
+- **H3c: 2011 is the hinge.** The 2011 programme redirects funding to growth firms, strengthens public venture capital, names accelerators and plans a capital-market strategy. 2015 continues that turn while cutting.
+- **H3d: an outside view may have carried the new frame.** The 2008 report and the 2009 international evaluation sit between the two vocabularies. Testing this needs EV2009F and the OECD reviews, which are pending.
+
+## Limits
+
+- **Programmes only.** Programmes say what governments intend. Whether instruments were actually created, kept or ended needs budgets, laws and annual reports. Those are not coded here, and agency annual reports would be used in public versions only.
+- **Coverage.** Instrument items come from claims coded for question 2 plus two passages. A programme may name instruments outside the coded chapters.
+- **One coder.** Actions and links were coded by Claude. Of the eight links between items, four are stated in the text (the same instrument named, or "sijasta"), two carry a stated continuation word but an inferred predecessor, and two are inferred; all are flagged.
+- **Small counts.** The growth-route test rests on 25 growth-firm or risk-capital claims in all. The stem rules are in the scripts, and every match is listed in `data/claim_families.csv`.
+- **Not an evaluation.** Nothing here judges whether any instrument or agency worked.
+- **Missing documents.** The 2008 strategy proposal (ST2008) is not online. EV2009F, OE2017 and OE2022 are waiting to be added.
+
+## Next steps
+
+1. Add EV2009F, OE2017 and OE2022 (the PDFs need to be attached by hand), and code their claims in English, to test H3d.
+2. Extend the instrument coding to all programme chapters, not only the coded claims.
+3. Do a human spot-check of the 26 instrument items.
+4. Add a fifth act, "the start-up turn", to the narrative dashboard.
